@@ -17,7 +17,7 @@ const Card = ({label, href, className, variant = "v1", gap = 0}: CardProps) => {
       }}
       className={cn(
         className,
-        "line-clamp-1 leading-none flex items-center justify-center rounded-2xl border-[3px] transition-transform active:scale-95 text-2xl font-bold",
+        "flex h-32 items-center justify-center rounded-2xl border-[3px] transition-transform active:scale-95 text-xl p-4 font-bold hover:scale-105",
         variant === "v1" &&
           "border-red-600 bg-gradient-to-tr from-red-900 via-red-800 to-red-300 text-white",
         variant === "v2" &&
@@ -44,7 +44,7 @@ const Card = ({label, href, className, variant = "v1", gap = 0}: CardProps) => {
         boxShadow: "-6px 6px 15px 0 #fff8",
       }}
     >
-      {label}
+      <div className="line-clamp-3 w-full text-ellipsis text-center">{label}</div>
     </button>
   );
 };

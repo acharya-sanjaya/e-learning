@@ -43,6 +43,7 @@ interface IconProps {
   className?: string;
   thickness?: number;
   iconName: keyof typeof iconMapper;
+  onClick?: () => void;
 }
 
 const Icon = (props: IconProps) => (
@@ -57,6 +58,7 @@ const Icon = (props: IconProps) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     className={props.className}
+    onClick={props.onClick}
   >
     {iconMapper[props.iconName] ?? (
       <div className={cn(props.className, "flex justify-center items-center size-full")}>

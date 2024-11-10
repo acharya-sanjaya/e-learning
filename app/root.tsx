@@ -1,6 +1,7 @@
 import {Links, Meta, Outlet, Scripts, ScrollRestoration} from "@remix-run/react";
 
 import "./tailwind.css";
+import AppContextProvider from "./context/AppContextProvider";
 
 export function Layout({children}: {children: React.ReactNode}) {
   return (
@@ -24,5 +25,9 @@ export function Layout({children}: {children: React.ReactNode}) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <AppContextProvider>
+      <Outlet />
+    </AppContextProvider>
+  );
 }

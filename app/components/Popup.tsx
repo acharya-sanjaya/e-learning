@@ -1,7 +1,16 @@
 import {ReactNode, useEffect, useState} from "react";
 import Icon from "~/Icons";
+import {cn} from "~/lib/utils";
 
-const Popup = ({onClose, children}: {onClose: () => void; children: ReactNode}) => {
+const Popup = ({
+  className,
+  onClose,
+  children,
+}: {
+  className?: string;
+  onClose: () => void;
+  children: ReactNode;
+}) => {
   const [applyInitialValue, setApplyInitialValue] = useState(true);
   const [popupTranslation, setPopupTranslation] = useState(
     "scale(1) translateY(calc(-50svh - 50%))"
@@ -30,7 +39,10 @@ const Popup = ({onClose, children}: {onClose: () => void; children: ReactNode}) 
       tabIndex={-1}
       onClick={closePopup}
       onKeyDown={(e) => e.key === "Enter" && closePopup()}
-      className="fixed pt-[100svh] bg-black/40 backdrop-blur-md w-svw h-svh top-0 left-0 flex justify-center"
+      className={cn(
+        "fixed pt-[100svh] bg-black/40 backdrop-blur-md w-svw h-svh top-0 left-1/2 -translate-x-1/2 flex justify-center",
+        className
+      )}
       style={{
         zIndex: 9999,
       }}

@@ -36,7 +36,7 @@ const Quiz = () => {
   const navigate = useNavigate();
   return (
     <div
-      className="w-svw h-svh flex flex-col
+      className="w-svw h-svh max-w-[400px] m-auto flex flex-col
       gap-3
      bg-slate-900 p-4 "
     >
@@ -147,6 +147,7 @@ const Quiz = () => {
       </div>
       {showPopup && (
         <Popup
+          className="max-w-[400px]"
           onClose={() => {
             setShowPopup(false);
             setRevealAnswer(false);

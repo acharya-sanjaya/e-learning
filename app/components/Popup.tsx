@@ -40,7 +40,7 @@ const Popup = ({
       onClick={closePopup}
       onKeyDown={(e) => e.key === "Enter" && closePopup()}
       className={cn(
-        "fixed pt-[100svh] bg-black/40 backdrop-blur-md w-svw h-svh top-0 left-1/2 -translate-x-1/2 flex justify-center",
+        "fixed pt-[100svh] bg-black/40 backdrop-blur-xl w-svw h-svh top-0 left-1/2 -translate-x-1/2 flex justify-center",
         className
       )}
       style={{

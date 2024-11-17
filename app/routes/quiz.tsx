@@ -23,6 +23,7 @@ const Quiz = () => {
     if (c === chapter) return;
     setChapter(c);
     setActiveIndex(0);
+    setJumpTo(1);
     setAnswer("");
   };
 
@@ -154,6 +155,7 @@ const Quiz = () => {
           onClick={() => {
             if (activeIndex <= 0) return;
             setActiveIndex((prevIndex) => prevIndex - 1);
+            setJumpTo((prev) => prev - 1);
             setAnswer("");
           }}
         >
@@ -168,6 +170,7 @@ const Quiz = () => {
           onClick={() => {
             if (activeIndex >= questionList.length - 1) return;
             setActiveIndex((prevIndex) => prevIndex + 1);
+            setJumpTo((prev) => prev + 1);
             setAnswer("");
           }}
         >

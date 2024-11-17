@@ -17,6 +17,7 @@ const Quiz = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [revealAnswer, setRevealAnswer] = useState(false);
+  const [jumpTo, setJumpTo] = useState(1);
 
   const changeChapter = (c: number) => {
     if (c === chapter) return;
@@ -51,7 +52,35 @@ const Quiz = () => {
         />
         <div className="text-3xl font-bold">Verbs</div>
       </div>
-      <div className="text-right text-xl">{`${activeIndex + 1} / ${questionList.length}`}</div>
+      <div className="flex w-full gap-2 justify-end text-xl items-center">
+        {activeIndex !== jumpTo - 1 && (
+          <button
+            className="bg-green-600 px-4 py-1 rounded-xl text-sm font-bold"
+            onClick={() => {
+              if (jumpTo <= 1) {
+                setActiveIndex(0);
+                setJumpTo(1);
+              } else if (jumpTo >= questionList.length) {
+                setActiveIndex(questionList.length - 1);
+                setJumpTo(questionList.length);
+              } else {
+                setActiveIndex(jumpTo - 1);
+              }
+            }}
+          >
+            Save
+          </button>
+        )}
+        <input
+          className="w-12 text-center bg-transparent outline-none focus:border focus:border-gray-500"
+          type="number"
+          value={jumpTo}
+          onChange={(e) => {
+            setJumpTo(parseInt(e.target.value, 10) || 1);
+          }}
+        />
+        <div>/ {questionList.length}</div>
+      </div>
       <div className="w-full h-2 bg-gray-500 rounded-full overflow-hidden">
         <div
           className="h-full bg-green-500 rounded-full transition-all duration-300"

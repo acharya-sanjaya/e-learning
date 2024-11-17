@@ -57,7 +57,7 @@ const Icon = (props: IconProps) => (
     strokeWidth={props.thickness}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className={props.className}
+    className={cn(props.className, "cursor-pointer active:scale-90 active:opacity-50")}
     onClick={props.onClick}
   >
     {iconMapper[props.iconName] ?? (

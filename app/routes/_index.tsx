@@ -28,6 +28,15 @@ export default function Index() {
       >
         Start Quiz
       </button>
+
+      <button
+        className="mt-4 py-2 px-5 bg-blue-500 text-white text-lg rounded-xl font-bold active:scale-90"
+        onClick={() => {
+          navigate("/lesson");
+        }}
+      >
+        Go to Lessons
+      </button>
     </div>
   );
 }

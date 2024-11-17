@@ -187,8 +187,7 @@ const Quiz = () => {
               if (activeIndex < questionList.length - 1) {
                 setActiveIndex((prevIndex) => prevIndex + 1);
                 setJumpTo((prev) => prev + 1);
-              }
-              else {
+              } else {
                 setActiveIndex(0);
                 setJumpTo(1);
               }

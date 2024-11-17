@@ -184,9 +184,14 @@ const Quiz = () => {
             setShowPopup(false);
             setRevealAnswer(false);
             if (isCorrect) {
-              activeIndex < questionList.length - 1
-                ? setActiveIndex((prevIndex) => prevIndex + 1)
-                : setActiveIndex(0);
+              if (activeIndex < questionList.length - 1) {
+                setActiveIndex((prevIndex) => prevIndex + 1);
+                setJumpTo((prev) => prev + 1);
+              }
+              else {
+                setActiveIndex(0);
+                setJumpTo(1);
+              }
 
               setAnswer("");
             }

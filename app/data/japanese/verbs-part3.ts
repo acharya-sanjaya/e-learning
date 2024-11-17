@@ -1,5 +1,10 @@
 const questions = [
   {
+    question: "to carry",
+    answer: "motsuteiku",
+    display: "もつていく",
+  },
+  {
     question: "to bring (something)",
     answer: "motsutekuru",
     display: "もつてくる",

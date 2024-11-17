@@ -249,11 +249,6 @@ const questions = [
     answer: "furu",
     display: "ふる",
   },
-  {
-    question: "to carry",
-    answer: "motsuteiku",
-    display: "もつていく",
-  },
 ];
 
 export default questions;

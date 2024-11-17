@@ -10,7 +10,7 @@ const Logo = () => {
   const [path6, setPath6] = useState(2554);
   const [path7, setPath7] = useState(4153);
   const [path8, setPath8] = useState(2547);
-  const [fillLogo, setFillLogo] = useState("transparent");
+  const [fillLogo, setFillLogo] = useState("fill-transparent");
   const [zoom, setZoom] = useState("scale-100");
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const Logo = () => {
     }, 7 * animationTime);
 
     const timeoutFillColor = setTimeout(() => {
-      setFillLogo("white");
+      setFillLogo("fill-black dark:fill-white");
       setZoom("scale-110");
     }, 8 * animationTime);
 
@@ -81,8 +81,7 @@ const Logo = () => {
     >
       <g
         transform="translate(0, 115) scale(0.1, -0.1)"
-        fill={fillLogo}
-        stroke="white"
+        className={cn("stroke-black dark:stroke-white", fillLogo)}
         strokeWidth={15}
       >
         <path

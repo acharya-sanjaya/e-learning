@@ -1,46 +1,46 @@
-import {ReactNode, useEffect, useState} from "react";
+import {ReactNode, useEffect, useRef, useState} from "react";
 import Icon from "~/Icons";
 import {cn} from "~/lib/utils";
 
 const Popup = ({
+  visible = false,
   className,
   onClose,
   children,
 }: {
+  visible: boolean;
   className?: string;
   onClose: () => void;
   children: ReactNode;
 }) => {
-  const [applyInitialValue, setApplyInitialValue] = useState(true);
-  const [popupTranslation, setPopupTranslation] = useState(
-    "scale(1) translateY(calc(-50svh - 50%))"
-  );
   const transitionTime = 300;
+  const [slideUp, setSlideUp] = useState(false);
+  const popupRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // This is to force transition effect on load
-    const timeout = setTimeout(() => {
-      setApplyInitialValue(false);
-    }, 100);
-    return () => clearTimeout(timeout);
-  }, []);
+    setSlideUp(visible);
+    popupRef.current?.focus();
+  }, [visible]);
 
   const closePopup = () => {
-    setPopupTranslation("scale(0) translate(0)");
-
+    setSlideUp(false);
+    // Sliding down make take a while
+    // So, call onClose after a delay
     setTimeout(() => {
-      onClose && onClose();
+      onClose();
     }, transitionTime);
   };
 
+  if (!visible) return null;
   return (
     <div
+      ref={popupRef}
       role="button"
-      tabIndex={-1}
+      tabIndex={0}
       onClick={closePopup}
-      onKeyDown={(e) => e.key === "Enter" && closePopup()}
+      onKeyDown={(e) => e.key === "Escape" && closePopup()}
       className={cn(
-        "fixed pt-[100svh] bg-black/40 backdrop-blur-xl w-svw h-svh top-0 left-1/2 -translate-x-1/2 flex justify-center",
+        "fixed pt-[100svh] bg-white/30 dark:bg-black/30 backdrop-blur-md w-svw h-svh top-0 left-1/2 -translate-x-1/2 flex justify-center",
         className
       )}
       style={{
@@ -50,19 +50,19 @@ const Popup = ({
       <div
         role="none"
         onClick={(event) => event.stopPropagation()}
-        className="cursor-default relative border-2 border-gray-600 rounded-lg p-10 flex justify-center items-center overflow-hidden bg-white/20"
+        className="cursor-default relative border-2 border-gray-600 rounded-lg p-10 flex justify-center items-center overflow-hidden bg-white/70 dark:bg-black/70"
         style={{
           width: "90%",
           height: "fit-content",
           maxHeight: "100svh",
-          transform: applyInitialValue ? "scale(0) translateY(0)" : popupTranslation,
+          transform: slideUp ? "scale(1) translateY(calc(-50svh - 50%))" : "scale(0) translateY(0)",
           transition: `transform ${transitionTime}ms ease-in-out`,
         }}
       >
         <Icon
           iconName="close"
           thickness={2}
-          className="cursor-pointer size-10 p-2 absolute top-0.5 right-0.5 stroke-white active:stroke-red-500"
+          className="cursor-pointer size-10 p-2 absolute top-0.5 right-0.5 active:stroke-red-500"
           onClick={closePopup}
         />
         {children}

@@ -18,8 +18,9 @@ const Quiz = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [revealAnswer, setRevealAnswer] = useState(false);
-  const [jumpTo, setJumpTo] = useState(1);
+  const [jumpTo, setJumpTo] = useState<number>(1);
   const answerRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const changeChapter = (c: number) => {
     if (c === chapter) return;
@@ -29,15 +30,18 @@ const Quiz = () => {
     setAnswer("");
   };
 
+  const removeSpaces = (str: string) => {
+    return str.replaceAll(/\s/g, "");
+  };
+
   const triggerPopup = () => {
     setShowPopup(true);
-    answer.toLowerCase() === questionList[activeIndex].answer.toLowerCase()
+    removeSpaces(answer.toLowerCase()) === questionList[activeIndex].answer.toLowerCase()
       ? setIsCorrect(true)
       : setIsCorrect(false);
     setRevealAnswer(false);
   };
 
-  const navigate = useNavigate();
   return (
     <div
       className="w-svw h-svh max-w-[400px] m-auto flex flex-col
@@ -57,39 +61,48 @@ const Quiz = () => {
       </div>
       <div className="flex w-full gap-2 justify-end text-xl items-center">
         <Button
-          visible={activeIndex !== jumpTo - 1}
+          visible={activeIndex !== (jumpTo as number) - 1}
           label="Save"
           variant="success"
           className="px-4 py-1 rounded-xl text-sm"
-          onClick={() => {
-            if (jumpTo <= 1) {
-              setActiveIndex(0);
-              setJumpTo(1);
-            } else if (jumpTo >= questionList.length) {
-              setActiveIndex(questionList.length - 1);
-              setJumpTo(questionList.length);
-            } else {
-              setActiveIndex(jumpTo - 1);
-            }
-          }}
+          // no onClick event as  inputfield's onBlur event handles everything
         />
         <input
           className="w-12 text-center bg-transparent outline-none focus:border focus:border-gray-500"
-          type="number"
+          type="text"
+          inputMode="numeric"
           value={jumpTo}
           onChange={(e) => {
-            setJumpTo(parseInt(e.target.value, 10) || 1);
+            const value = e.target.value;
+            const numberOnly = value.match(/^\d+$/);
+            const validInput = value === "" || numberOnly;
+            if (!validInput) return;
+            else setJumpTo(e.target.value as unknown as number);
+          }}
+          onBlur={() => {
+            if ((jumpTo as unknown) === "" || Number(jumpTo) <= 0) {
+              setJumpTo(1);
+              setActiveIndex(0);
+            } else {
+              if (Number(jumpTo) > questionList.length) {
+                setJumpTo(questionList.length);
+                setActiveIndex(questionList.length - 1);
+              } else {
+                setJumpTo(Number(jumpTo));
+                setActiveIndex((jumpTo as number) - 1);
+              }
+            }
           }}
         />
         <div>/ {questionList.length}</div>
       </div>
-      <div className="w-full h-2 bg-gray:400 dark:bg-gray-600 rounded-full overflow-hidden">
+      <div className="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
         <div
           className="h-full bg-green-500 rounded-full transition-all duration-300"
           style={{width: `${((activeIndex + 1) * 100) / questionList.length}%`}}
         ></div>
       </div>
-      <div className="bg-black/30 my-4 py-10 text-center text-lg">
+      <div className="bg-gray-100 dark:bg-slate-800 my-4 py-10 text-center text-lg rounded-lg">
         {questionList[activeIndex].question}
       </div>
       <div>
@@ -109,24 +122,9 @@ const Quiz = () => {
       </div>
       <Button label="Submit" onClick={() => triggerPopup()} />
       <div className="mt-10 max-h-28 items-center flex w-full justify-between flex-wrap gap-4 overflow-y-auto overflow-x-hidden">
-        <Button
-          label="Set 1"
-          variant="standard"
-          isActive={chapter === 0}
-          onClick={() => changeChapter(0)}
-        />
-        <Button
-          label="Set 2"
-          variant="standard"
-          isActive={chapter === 1}
-          onClick={() => changeChapter(1)}
-        />
-        <Button
-          label="Set 2"
-          variant="standard"
-          isActive={chapter === 2}
-          onClick={() => changeChapter(2)}
-        />
+        <Button label="Set 1" isActive={chapter === 0} onClick={() => changeChapter(0)} />
+        <Button label="Set 2" isActive={chapter === 1} onClick={() => changeChapter(1)} />
+        <Button label="Set 3" isActive={chapter === 2} onClick={() => changeChapter(2)} />
       </div>
       <div className="mt-auto flex justify-between">
         <Button
@@ -135,7 +133,7 @@ const Quiz = () => {
           isDisabled={activeIndex <= 0}
           onClick={() => {
             setActiveIndex((prevIndex) => prevIndex - 1);
-            setJumpTo((prev) => prev - 1);
+            setJumpTo((prev) => (prev as number) - 1);
             setAnswer("");
           }}
         />
@@ -145,7 +143,7 @@ const Quiz = () => {
           isDisabled={activeIndex >= questionList.length - 1}
           onClick={() => {
             setActiveIndex((prevIndex) => prevIndex + 1);
-            setJumpTo((prev) => prev + 1);
+            setJumpTo((prev) => (prev as number) + 1);
             setAnswer("");
           }}
         />
@@ -159,7 +157,7 @@ const Quiz = () => {
           if (isCorrect) {
             if (activeIndex < questionList.length - 1) {
               setActiveIndex((prevIndex) => prevIndex + 1);
-              setJumpTo((prev) => prev + 1);
+              setJumpTo((prev) => (prev as number) + 1);
             } else {
               setActiveIndex(0);
               setJumpTo(1);

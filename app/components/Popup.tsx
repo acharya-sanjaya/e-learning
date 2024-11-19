@@ -40,7 +40,7 @@ const Popup = ({
       onClick={closePopup}
       onKeyDown={(e) => e.key === "Escape" && closePopup()}
       className={cn(
-        "fixed pt-[100svh] bg-white/30 dark:bg-black/30 backdrop-blur-md w-svw h-svh top-0 left-1/2 -translate-x-1/2 flex justify-center",
+        "fixed pt-[100svh] bg-white/30 dark:bg-black/30 backdrop-blur-2xl w-svw h-svh top-0 left-1/2 -translate-x-1/2 flex justify-center",
         className
       )}
       style={{

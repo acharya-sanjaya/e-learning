@@ -1,5 +1,6 @@
 import {useNavigate} from "@remix-run/react";
 import {useState} from "react";
+import Button from "~/components/Button";
 import q1 from "~/data/japanese/verbs-part1";
 import q2 from "~/data/japanese/verbs-part2";
 import q3 from "~/data/japanese/verbs-part3";
@@ -33,39 +34,9 @@ const Lesson = () => {
         />
       </div>
       <div className="mt-10 max-h-28 items-center flex w-full justify-between flex-wrap gap-4 overflow-y-auto overflow-x-hidden">
-        <button
-          className={cn(
-            "py-2 px-5 bg-blue-500 text-white text-lg rounded-xl font-bold active:scale-90",
-            chapter === 0 && "bg-white/95 text-black active:scale-100 cursor-not-allowed"
-          )}
-          onClick={() => {
-            changeChapter(0);
-          }}
-        >
-          Set 1
-        </button>
-        <button
-          className={cn(
-            "py-2 px-5 bg-blue-500 text-white text-lg rounded-xl font-bold active:scale-90",
-            chapter === 1 && "bg-white/95 text-black active:scale-100 cursor-not-allowed"
-          )}
-          onClick={() => {
-            changeChapter(1);
-          }}
-        >
-          Set 2
-        </button>
-        <button
-          className={cn(
-            "py-2 px-5 bg-blue-500 text-white text-lg rounded-xl font-bold active:scale-90",
-            chapter === 2 && "bg-white/95 text-black active:scale-100 cursor-not-allowed"
-          )}
-          onClick={() => {
-            changeChapter(2);
-          }}
-        >
-          Set 3
-        </button>
+        <Button label="Set 1" isActive={chapter === 0} onClick={() => changeChapter(0)} />
+        <Button label="Set 2" isActive={chapter === 1} onClick={() => changeChapter(1)} />
+        <Button label="Set 3" isActive={chapter === 2} onClick={() => changeChapter(2)} />
       </div>
       <table className="table-auto w-full text-center text-3xl border border-gray-500">
         <thead>

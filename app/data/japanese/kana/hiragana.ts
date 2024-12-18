@@ -114,8 +114,8 @@ export const yoon = {
 };
 
 export const shokuon = {
-  tsu: "つ", // pause
+  chu: "っ",
 };
 
-const hiragana: Record<string, string> = {...gojuon, ...dakuon, ...handakuon, ...yoon};
+const hiragana: Record<string, string> = {...gojuon, ...dakuon, ...handakuon, ...yoon, ...shokuon};
 export default hiragana;

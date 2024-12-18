@@ -53,14 +53,14 @@ export const dakuon = {
   gu: "グ",
   ge: "ゲ",
   go: "ゴ",
-  ja: "ジ",
+  ja: "ザ",
   ji: "ジ",
-  ju: "ジ",
-  je: "ジ",
-  jo: "ジ",
+  ju: "ズ",
+  je: "ゼ",
+  jo: "ゾ",
   da: "ダ",
-  zi: "ジ",
-  zu: "ズ",
+  zi: "ヂ",
+  zu: "ヅ",
   de: "デ",
   do: "ド",
   ba: "バ",
@@ -115,8 +115,8 @@ export const yoon = {
 };
 
 export const shokuon = {
-  tsu: "ツ", // pause
+  chu: "ッ", // pause
 };
 
-const katakana: Record<string, string> = {...gojuon, ...dakuon, ...handakuon, ...yoon};
+const katakana: Record<string, string> = {...gojuon, ...dakuon, ...handakuon, ...yoon, ...shokuon};
 export default katakana;

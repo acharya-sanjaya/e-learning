@@ -43,7 +43,7 @@ const Button = ({
         shouldUseVariant && variantStyles[variant],
         shouldUseVariant && "active:scale-90",
         isActive &&
-          "bg-gradient-to-tr from-gray-600 to-gray-800 dark:from-gray-100 dark:to-gray-300 text-white dark:text-black ",
+          "bg-gradient-to-tr from-gray-600 to-gray-800 dark:from-gray-100 dark:to-gray-300 text-white dark:text-black",
         isDisabled && "cursor-not-allowed bg-gray-400/70 text-white",
         className
       )}

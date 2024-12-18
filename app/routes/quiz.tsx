@@ -1,12 +1,11 @@
-import {useNavigate} from "@remix-run/react";
 import {useRef, useState} from "react";
 import Button from "~/components/Button";
+import PageHeader from "~/components/PageHeader";
 import Popup from "~/components/Popup";
 import chapter1 from "~/data/japanese/verbs-part1";
 import chapter2 from "~/data/japanese/verbs-part2";
 import chapter3 from "~/data/japanese/verbs-part3";
 
-import Icon from "~/Icons";
 import {cn} from "~/lib/utils";
 
 const questions = [chapter1, chapter2, chapter3];
@@ -20,7 +19,6 @@ const Quiz = () => {
   const [revealAnswer, setRevealAnswer] = useState(false);
   const [jumpTo, setJumpTo] = useState<number>(1);
   const answerRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
 
   const changeChapter = (c: number) => {
     if (c === chapter) return;
@@ -48,17 +46,7 @@ const Quiz = () => {
       gap-3
      dark:bg-slate-900 dark:text-white p-4 "
     >
-      <div className="relative flex justify-center items-center">
-        <Icon
-          thickness={2}
-          onClick={() => {
-            navigate(-1);
-          }}
-          iconName="close"
-          className="size-8 absolute left-0"
-        />
-        <div className="text-3xl font-bold">Verbs</div>
-      </div>
+      <PageHeader label="Verbs" labelClassName="text-3xl" />
       <div className="flex w-full gap-2 justify-end text-xl items-center">
         <Button
           visible={activeIndex !== (jumpTo as number) - 1}

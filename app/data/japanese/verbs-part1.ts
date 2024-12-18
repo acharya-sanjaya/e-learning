@@ -252,3 +252,132 @@ const questions = [
 ];
 
 export default questions;
+
+export const greetings = [
+  {
+    en: "Hello / Good afternoon",
+    np: "नमस्ते / शुभ अपराह्न",
+    jp: "こんにちは",
+    kanji: "こんにちは",
+  },
+  {
+    en: "Good morning (polite)",
+    np: "शुभ प्रभात",
+    jp: "おはようございます",
+    kanji: "おはようございます",
+  },
+  {
+    en: "Good evening",
+    np: "शुभ सन्ध्या",
+    jp: "こんばんは",
+    kanji: "こんばんは",
+  },
+  {
+    en: "Good night (polite)",
+    np: "शुभ रात्रि",
+    jp: "おやすみなさい",
+    kanji: "おやすみなさい",
+  },
+  {
+    en: "Goodbye",
+    np: "अलविदा",
+    jp: "さようなら",
+    kanji: "さようなら",
+  },
+  {
+    en: "Excuse me / Sorry",
+    np: "माफ गर्नुहोस्",
+    jp: "すみません",
+    kanji: "すみません",
+  },
+  {
+    en: "See you tomorrow",
+    np: "भोलि भेटौंला",
+    jp: "じゃまたあした",
+    kanji: "じゃまた明日",
+  },
+  {
+    en: "Thank you (polite)",
+    np: "धन्यवाद",
+    jp: "ありがとうございます",
+    kanji: "ありがとうございます",
+  },
+  {
+    en: "Thank you for your hard work",
+    np: "तपाईंको मेहनतको लागि धन्यवाद",
+    jp: "おつかれさまでした",
+    kanji: "お疲れ様でした",
+  },
+  {
+    en: "Please (formal)",
+    np: "कृपया",
+    jp: "おねがいします",
+    kanji: "お願いします",
+  },
+  {
+    en: "Same to you",
+    np: "त्यस्तै",
+    jp: "こちらこそ",
+    kanji: "こちらこそ",
+  },
+  {
+    en: "Once more",
+    np: "फेरि",
+    jp: "もういちどおねがいします",
+    kanji: "もう一度お願いします",
+  },
+  {
+    en: "I understand",
+    np: "म बुझें",
+    jp: "わかります",
+    kanji: "分かります",
+  },
+  {
+    en: "Welcome (to a store)",
+    np: "स्वागत छ",
+    jp: "いらっしゃいませ",
+    kanji: "いらっしゃいませ",
+  },
+  {
+    en: "I'm back",
+    np: "म फर्कें",
+    jp: "ただいま",
+    kanji: "ただ今",
+  },
+  {
+    en: "Welcome back",
+    np: "पुन: स्वागत छ",
+    jp: "おかえりなさい",
+    kanji: "お帰りなさい",
+  },
+  {
+    en: "Take care",
+    np: "ख्याल राख्नुहोस्",
+    jp: "お気をつけて",
+    kanji: "お気を付けて",
+  },
+  {
+    en: "See you later",
+    np: "पछि भेटौंला",
+    jp: "またね",
+    kanji: "またね",
+  },
+  {
+    en: "I'm leaving",
+    np: "म जाँदैछु",
+    jp: "いってきます",
+    kanji: "行ってきます",
+  },
+  {
+    en: "Please go and come back",
+    np: "जानुहोस् र फर्कनुहोस्",
+    jp: "いってらっしゃい",
+    kanji: "行ってらっしゃい",
+  },
+  {
+    en: "Welcome",
+    np: "स्वागत छ",
+    jp: "ようこそ",
+    kanji: "ようこそ",
+  },
+];

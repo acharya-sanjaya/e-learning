@@ -1,6 +1,7 @@
-import { vitePlugin as remix } from "@remix-run/dev";
-import { defineConfig } from "vite";
+import {vitePlugin as remix} from "@remix-run/dev";
+import {defineConfig} from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import dynamicImportVars from "@rollup/plugin-dynamic-import-vars";
 
 declare module "@remix-run/node" {
   interface Future {
@@ -20,5 +21,11 @@ export default defineConfig({
       },
     }),
     tsconfigPaths(),
+    {
+      ...dynamicImportVars({
+        include: ["./app/routes/**/*.tsx", "./app/components/**/*.tsx"],
+        exclude: ["./app/excluded/**"],
+      }),
+    },
   ],
 });

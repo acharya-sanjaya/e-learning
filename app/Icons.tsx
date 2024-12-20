@@ -45,6 +45,8 @@ const iconMapper = {
   ),
 } as const;
 
+export type IconNameType = keyof typeof iconMapper;
+
 interface IconProps {
   className?: string;
   thickness?: number;
@@ -52,7 +54,7 @@ interface IconProps {
   onClick?: () => void;
 }
 
-const Icon = (props: IconProps) => (
+const Icon = ({thickness = 2, ...props}: IconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -60,7 +62,7 @@ const Icon = (props: IconProps) => (
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
-    strokeWidth={props.thickness}
+    strokeWidth={thickness}
     strokeLinecap="round"
     strokeLinejoin="round"
     className={cn(props.className, "cursor-pointer active:scale-90 stroke:black dark:stroke-white")}

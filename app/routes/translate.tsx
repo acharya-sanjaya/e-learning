@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import PageHeader from "~/components/PageHeader";
 import Select from "~/components/Select";
 import hiraganaMapper from "~/data/japanese/kana/hiragana";
@@ -7,29 +7,37 @@ import katakanaMapper from "~/data/japanese/kana/katakana";
 export default function Translate() {
   const [mode, setMode] = useState(false);
   const [textEn, setTextEn] = useState("");
-  const [textJp, setTextJp] = useState("");
   const kanaMapper = mode ? katakanaMapper : hiraganaMapper;
 
-  useEffect(() => {
-    const handleTranslation = (latestText: string) => {
-      const words = latestText.split(" ");
-      const translatedWords = words.map((word) => {
-        if (word.length > 1 && word[0] === word[1]) {
-          const actualWord = word.slice(1);
-          if (kanaMapper[actualWord]) {
-            return kanaMapper["chu"] + kanaMapper[actualWord];
-          } else {
-            return word;
-          }
+  const translateText = (input: string) => {
+    const vowels = new Set(["a", "e", "i", "o", "u"]);
+    const noSpaceText = input
+      .replace(/[\\-]+/g, "")
+      .replace(/\s+/g, "")
+      .toLowerCase();
+    let result = "";
+    let romajiChunk = "";
+
+    for (let i = 0; i < noSpaceText.length; i++) {
+      romajiChunk += noSpaceText[i];
+
+      if (vowels.has(noSpaceText[i]) || i === noSpaceText.length - 1) {
+        if (romajiChunk.length > 1 && romajiChunk[0] === romajiChunk[1]) {
+          const actualChunk = romajiChunk.slice(1);
+          result += kanaMapper[actualChunk]
+            ? kanaMapper["chu"] + kanaMapper[actualChunk]
+            : actualChunk[0] + actualChunk;
+        } else {
+          result += kanaMapper[romajiChunk] ?? romajiChunk;
         }
+        romajiChunk = "";
+      }
+    }
 
-        return kanaMapper[word] ?? word;
-      });
-      setTextJp(translatedWords.join(""));
-    };
+    return result;
+  };
 
-    handleTranslation(textEn);
-  }, [textEn, kanaMapper]);
+  const translatedText = translateText(textEn);
 
   return (
     <div className="flex flex-col gap-2 p-4 m-auto w-full max-w-[400px]">
@@ -59,9 +67,9 @@ export default function Translate() {
         id="text"
         cols={30}
         rows={5}
-        value={textJp}
+        readOnly
+        value={translatedText}
         className="p-4 text-5xl rounded-xl font-sans outline-none border border-gray-300 dark:border-gray-600 focus:border-blue-500"
-        onChange={(e) => e}
       ></textarea>
     </div>
   );

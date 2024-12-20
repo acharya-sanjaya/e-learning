@@ -46,7 +46,7 @@ const Quiz = () => {
       gap-3
      dark:bg-slate-900 dark:text-white p-4 "
     >
-      <PageHeader label="Verbs" labelClassName="text-3xl" />
+      <PageHeader iconName="close" label="Quiz" labelClassName="text-3xl" />
       <div className="flex w-full gap-2 justify-end text-xl items-center">
         <Button
           visible={activeIndex !== (jumpTo as number) - 1}

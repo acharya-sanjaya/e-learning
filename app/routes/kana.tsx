@@ -54,6 +54,13 @@ export default function Kana() {
       <Row mapper={kanaMapper} row={["mya", "myu", "myo"]} />
       <Row mapper={kanaMapper} row={["rya", "ryu", "ryo"]} />
       <Hr />
+
+      <Topic label="Tenten (“) and Maru (˚) (Dakuon and Handakuon) of Small letters" />
+      <Row mapper={kanaMapper} row={["gya", "gyu", "gyo"]} />
+      <Row mapper={kanaMapper} row={["jya", "jyu", "jyo"]} />
+      <Row mapper={kanaMapper} row={["bya", "byu", "byo"]} />
+      <Row mapper={kanaMapper} row={["pya", "pyu", "pyo"]} />
+      <Hr />
     </div>
   );
 }

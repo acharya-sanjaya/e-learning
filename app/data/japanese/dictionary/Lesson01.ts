@@ -170,9 +170,9 @@ const words = [
   {
     en: "How old",
     np: "तिमि कति वर्ष भयौ",
-    jp: "おいくつ",
-    kanji: "おいくつ",
-    romaji: "Oikutsu",
+    jp: "なんさい",
+    kanji: "何歳",
+    romaji: "Nansai",
   },
   {
     en: "How old (polite)",

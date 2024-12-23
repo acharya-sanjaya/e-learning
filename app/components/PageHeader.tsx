@@ -28,7 +28,7 @@ const PageHeader = ({iconName = "arrowLeft", label, labelClassName}: PageHeaderP
   const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <div className="relative z-[99999]">
+    <div className="relative z-[999]">
       <div className="fixed inset-0 w-screen flex justify-center items-center h-20 backdrop-blur-md">
         <Icon
           onClick={() => {

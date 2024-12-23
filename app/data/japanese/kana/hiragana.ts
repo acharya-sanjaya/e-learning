@@ -82,12 +82,12 @@ export const yoon = {
   kya: {jp: "きゃ", np: "क्या"},
   kyu: {jp: "きゅ", np: "क्यु"},
   kyo: {jp: "きょ", np: "क्यो"},
-  sya: {jp: "しゃ", np: "स्य"},
-  syu: {jp: "しゅ", np: "श्यु"},
-  syo: {jp: "しょ", np: "शो"},
-  tya: {jp: "ちゃ", np: "च्य"},
-  tyu: {jp: "ちゅ", np: "च्यु"},
-  tyo: {jp: "ちょ", np: "च्यो"},
+  sya: {jp: "しゃ", np: "स्या"},
+  syu: {jp: "しゅ", np: "स्यु"},
+  syo: {jp: "しょ", np: "स्यो"},
+  chya: {jp: "ちゃ", np: "च्या"},
+  chyu: {jp: "ちゅ", np: "च्यु"},
+  chyo: {jp: "ちょ", np: "च्यो"},
   nya: {jp: "にゃ", np: "न्या"},
   nyu: {jp: "にゅ", np: "न्यु"},
   nyo: {jp: "にょ", np: "न्यो"},
@@ -106,6 +106,9 @@ export const yoon = {
   jya: {jp: "じゃ", np: "ज्या"},
   jyu: {jp: "じゅ", np: "ज्यु"},
   jyo: {jp: "じょ", np: "ज्यो"},
+  zya: {jp: "じゃ", np: "ज्या"},
+  zyu: {jp: "じゅ", np: "ज्यु"},
+  zyo: {jp: "じょ", np: "ज्यो"},
   bya: {jp: "びゃ", np: "ब्या"},
   byu: {jp: "びゅ", np: "ब्यु"},
   byo: {jp: "びょ", np: "ब्यो"},
@@ -115,7 +118,7 @@ export const yoon = {
 };
 
 export const shokuon = {
-  chu: {jp: "っ", np: "सानो"},
+  chu: {jp: "っ", np: "सानो चु"},
 };
 interface KanaType {
   [key: string]: {jp: string; np: string};

@@ -41,7 +41,6 @@ const Select = ({
         style={{
           width: switchSize,
           height: switchSize / 2,
-          //   transform: `scale(${switchSize})`,
         }}
       >
         <div
@@ -56,7 +55,7 @@ const Select = ({
           <div className={cn("w-1/2", bgOff)}></div>
           <div
             className={cn(
-              "absolute h-full bg-gray-100 dark:bg-gray-100 rounded-full border-4",
+              "absolute h-full bg-gray-100 rounded-full border-4",
               value ? borderOn : borderOff
             )}
             style={{
@@ -66,7 +65,7 @@ const Select = ({
         </div>
       </div>
       {labelOn && labelOff && (
-        <div className={labelClassName} style={{userSelect: "none"}}>
+        <div className={cn("select-none text-5xl font-bold", labelClassName)}>
           {value ? labelOn : labelOff}
         </div>
       )}

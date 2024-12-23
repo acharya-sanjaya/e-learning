@@ -3,20 +3,23 @@ import PageHeader from "~/components/PageHeader";
 import Select from "~/components/Select";
 import hiraganaMapper from "~/data/japanese/kana/hiragana";
 import katakanaMapper from "~/data/japanese/kana/katakana";
+import usePreference from "~/hooks/usePreference";
+import {cn} from "~/lib/utils";
 
 export default function Kana() {
   const [mode, setMode] = useState(false);
   const kanaMapper = mode ? katakanaMapper : hiraganaMapper;
+  const {jpFont} = usePreference();
 
   return (
     <div className="flex flex-col w-full p-4">
-      <PageHeader label="Kana" labelClassName="text-3xl" />
+      <PageHeader iconName="close" label="Kana" labelClassName="text-3xl" />
       <Select
         value={mode}
         handleChange={() => setMode((prev) => !prev)}
         labelOff="ひらがな"
         labelOn="かたかな"
-        labelClassName="text-5xl font-bold"
+        labelClassName={jpFont}
         className="mr-auto"
         switchSize={50}
         bgOff="bg-green-500"
@@ -71,17 +74,31 @@ const Hr = () => (
 
 const Topic = ({label}: {label: string}) => <div className="text-3xl font-bold my-1">{label}</div>;
 
-const Row = ({row, id, mapper}: {row: string[]; id?: string; mapper: Record<string, string>}) => {
+const Row = ({
+  row,
+  id,
+  mapper,
+}: {
+  row: string[];
+  id?: string;
+  mapper: Record<string, {jp: string; np: string}>;
+}) => {
+  const {jpFont, romajiStatus, isNepali} = usePreference();
+
   return (
-    <div className="flex justify-between">
+    <div className={cn("flex justify-between", jpFont)}>
       {row.map((letter, i) => {
         if (letter === "") return <div key={(id as string) + i}></div>;
         return (
           <div
             key={letter}
-            className="text-3xl font-sans hover:cursor-pointer hover:bg-gray-500 p-2 active:scale-90"
+            className={cn(
+              "flex flex-col items-center justify-center text-3xl hover:cursor-pointer hover:bg-gray-500 p-2 active:scale-90",
+              jpFont
+            )}
           >
-            {mapper[letter]}
+            {romajiStatus && (isNepali ? <div>{mapper[letter].np}</div> : <div>{letter}</div>)}
+            {mapper[letter].jp}
           </div>
         );
       })}

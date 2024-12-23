@@ -5,9 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const isRunningOnServer = () => typeof window === "undefined";
+
 export function getLocalStorageData(key: string, isParseNeeded: boolean, defaultValue: string) {
-  if (typeof window === "undefined") {
-    // If running in the server
+  if (isRunningOnServer()) {
     if (isParseNeeded) {
       return JSON.parse(defaultValue);
     }
@@ -30,8 +31,7 @@ export function getLocalStorageData(key: string, isParseNeeded: boolean, default
 }
 
 export function updateLocalStorageData<T>(key: string, value: T, isStringifyNeeded: boolean) {
-  if (typeof window === "undefined") {
-    // If running in the server
+  if (isRunningOnServer()) {
     return;
   }
 
@@ -48,8 +48,7 @@ export function updateLocalStorageData<T>(key: string, value: T, isStringifyNeed
 }
 
 export function removeLocalStorageData(key: string): string {
-  // If running in the server
-  if (typeof window === "undefined") return "Can't access localStorage while on server";
+  if (isRunningOnServer()) return "Can't access localStorage while on server";
 
   // If running in the client (browser)
   try {

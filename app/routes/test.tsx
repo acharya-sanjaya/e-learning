@@ -8,12 +8,12 @@ import {cn} from "~/lib/utils";
 
 type jpFontType = "font-sans" | "font-serif";
 
-const Test = () => {
+const Lesson = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showRomaji, setShowRomaji] = useState(false);
   const [showNepali, setShowNepali] = useState(true);
   const [showKanji, setShowKanji] = useState(false);
-  const [jpFont, setJpFont] = useState<jpFontType>("font-serif");
+  const [jpFont, setJpFont] = useState<jpFontType>("font-sans");
 
   const toggleNepali = () => setShowNepali((x) => !x);
   const toggleKanji = () => setShowKanji((x) => !x);
@@ -160,4 +160,4 @@ export const FontDropdown = ({
   );
 };
 
-export default Test;
+export default Lesson;

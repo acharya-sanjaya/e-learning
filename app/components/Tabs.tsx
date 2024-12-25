@@ -16,7 +16,7 @@ export default function Tabs({options, activeIndex, handleChange, className}: Ta
           onKeyDown={(e) => e.key in ["Enter", " "] && handleChange(option)}
           key={option}
           className={cn(
-            "font-bold text-md select-none flex items-center px-4 py-2",
+            "font-bold text-sm select-none flex items-center px-4 py-2",
             index > 0 && "border-l-2 border-l-gray-200 dark:border-l-gray-600",
             activeIndex === index
               ? "bg-gray-800 text-white dark:bg-gray-200 dark:text-black"

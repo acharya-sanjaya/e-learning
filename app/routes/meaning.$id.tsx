@@ -1,5 +1,9 @@
 import {LoaderFunction} from "@remix-run/node";
 import {json, MetaFunction, useLoaderData} from "@remix-run/react";
+import FlipCard from "~/components/FlipCard";
+import PageHeader from "~/components/PageHeader";
+import usePreference from "~/hooks/usePreference";
+import {cn} from "~/lib/utils";
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,16 +35,39 @@ export const loader: LoaderFunction = async ({params}) => {
 
 export default function Meaning() {
   const {words} = useLoaderData<{words: WordType[]}>();
-  return words.map((word, index) => (
-    <div
-      className="flex flex-col gap-2 mx-4 my-12 p-4 border border-white w-fit"
-      key={"meaning" + index}
-    >
-      <div>{word.en}</div>
-      <div>{word.np}</div>
-      <div>{word.jp}</div>
-      <div>{word.romaji}</div>
-      <div>{word.kanji}</div>
+  const {isNepali, romajiStatus, jpFont, showKanji} = usePreference();
+
+  return (
+    <div className="p-4">
+      <PageHeader iconName="close" label="Meanings: Lesson 1" labelClassName="text-lg" />
+      <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(160px,1fr))]">
+        {words.map((word, index) => (
+          <FlipCard
+            key={index}
+            front={
+              <>
+                {showKanji ? (
+                  <div className={cn("text-center text-2xl", jpFont)}>{word.kanji}</div>
+                ) : (
+                  <div className={cn("text-center", jpFont, romajiStatus ? "text-lg" : "text-2xl")}>
+                    {word.jp}
+                  </div>
+                )}
+                {romajiStatus && !showKanji && <div className="text-center">{word.romaji}</div>}
+              </>
+            }
+            back={
+              <>
+                {isNepali ? (
+                  <div className="text-center text-xl">{word.np}</div>
+                ) : (
+                  <div className="text-center text-xl">{word.en}</div>
+                )}
+              </>
+            }
+          />
+        ))}
+      </div>
     </div>
-  ));
+  );
 }

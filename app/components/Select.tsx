@@ -65,7 +65,7 @@ const Select = ({
         </div>
       </div>
       {labelOn && labelOff && (
-        <div className={cn("select-none text-5xl font-bold", labelClassName)}>
+        <div className={cn("select-none text-4xl font-bold", labelClassName)}>
           {value ? labelOn : labelOff}
         </div>
       )}

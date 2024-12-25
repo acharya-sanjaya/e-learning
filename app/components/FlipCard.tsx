@@ -9,7 +9,7 @@ export default function FlipCard({front, back}: FlipCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   return (
     <div
-      className="relative w-40 h-56 text-[14px]"
+      className="relative w-full h-56 text-[14px]"
       style={{
         perspective: "1000px",
       }}

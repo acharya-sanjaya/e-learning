@@ -79,12 +79,12 @@ export const smallLetterKeys = [
   "kya",
   "kyu",
   "kyo",
-  "sya",
-  "syu",
-  "syo",
-  "chya",
-  "chyu",
-  "chyo",
+  "sha",
+  "shu",
+  "sho",
+  "cha",
+  "chu",
+  "cho",
   "nya",
   "nyu",
   "nyo",
@@ -134,15 +134,31 @@ export const tentenMaruKeyboardKeys = [
 
 export const smallLetterKeyboardKeys = [
   ["kya", "kyu", "kyo"],
-  ["sya", "syu", "syo"],
-  ["chya", "chyu", "chyo"],
+  ["sha", "shu", "sho"],
+  ["cha", "chu", "cho"],
   ["nya", "nyu", "nyo"],
   ["hya", "hyu", "hyo"],
   ["mya", "myu", "myo"],
   ["rya", "ryu", "ryo"],
   ["gya", "gyu", "gyo"],
   ["jya", "jyu", "jyo"],
-  ["zya", "zyu", "zyo"],
+  ["bya", "byu", "byo"],
+  ["pya", "pyu", "pyo"],
+];
+
+export const yoonKeyboardKeys = [
+  ["kya", "kyu", "kyo"],
+  ["sha", "shu", "sho"],
+  ["cha", "chu", "cho"],
+  ["nya", "nyu", "nyo"],
+  ["hya", "hyu", "hyo"],
+  ["mya", "myu", "myo"],
+  ["rya", "ryu", "ryo"],
+];
+
+export const yoonTenTenMaruKeyboardKeys = [
+  ["gya", "gyu", "gyo"],
+  ["jya", "jyu", "jyo"],
   ["bya", "byu", "byo"],
   ["pya", "pyu", "pyo"],
 ];

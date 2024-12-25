@@ -29,7 +29,7 @@ const PageHeader = ({iconName = "arrowLeft", label, labelClassName}: PageHeaderP
 
   return (
     <div className="relative z-[999]">
-      <div className="fixed inset-0 w-screen flex justify-center items-center h-20 backdrop-blur-md">
+      <div className="fixed inset-0 w-screen flex justify-center items-center h-20 backdrop-blur-md border-b-2 border-b-gray-100 dark:border-b-gray-800">
         <Icon
           onClick={() => {
             navigate(-1);

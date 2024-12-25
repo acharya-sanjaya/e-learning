@@ -27,19 +27,19 @@ export const loader: LoaderFunction = async ({params}) => {
   try {
     const words = (await import(`../data/japanese/dictionary/Lesson${id}.ts`)).default;
 
-    return json({words});
+    return json({words, id: Number(id)});
   } catch (e) {
     throw new Response("Lesson not found", {status: 404});
   }
 };
 
 export default function Meaning() {
-  const {words} = useLoaderData<{words: WordType[]}>();
+  const {words, id} = useLoaderData<{words: WordType[]; id: number}>();
   const {isNepali, romajiStatus, jpFont, showKanji} = usePreference();
 
   return (
     <div className="p-4">
-      <PageHeader iconName="close" label="Meanings: Lesson 1" labelClassName="text-lg" />
+      <PageHeader iconName="close" label={`Lesson ${id}`} labelClassName="text-lg" />
       <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(160px,1fr))]">
         {words.map((word, index) => (
           <FlipCard

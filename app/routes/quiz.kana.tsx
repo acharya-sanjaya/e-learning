@@ -127,7 +127,7 @@ const Keyboard = ({keys, kanaMapper, onKeyPress}: KeyboardProps) => {
                 "flex flex-1 m-1 rounded-lg justify-center text-lg select-none hover:cursor-pointer p-1",
                 key === ""
                   ? "bg-gray-300 dark:bg-gray-800"
-                  : "bg-blue-500 hover:bg-blue-600 active:scale-90"
+                  : "bg-blue-500 hover:bg-blue-600 text-white active:scale-90"
               )}
               onClick={() => key && onKeyPress(key)}
             >

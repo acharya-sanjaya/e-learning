@@ -17,19 +17,14 @@ import usePreference from "~/hooks/usePreference";
 import {cn, getRandomInt} from "~/lib/utils";
 
 export default function QuizKana() {
-  interface QuestionType {
-    jp: string;
-    np: string;
-  }
-
   const [mode, setMode] = useState(true);
-  const [activeQuestion, setActiveQuestion] = useState<QuestionType | null>(null);
+  const [activeKey, setActiveKey] = useState("");
   const [testMode, setTestMode] = useState("Kana");
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
 
   const kanaMapper = mode ? hiraganaMapper : katakanaMapper;
-  const {jpFont} = usePreference();
+  const {jpFont, isNepali} = usePreference();
   const activeTestModeNumber = testMode === "Kana" ? 0 : testMode === "Tenten Maru" ? 1 : 2;
 
   let keys: string[];
@@ -52,14 +47,14 @@ export default function QuizKana() {
   const changeQuestion = () => {
     const randomIndex = getRandomInt(keys.length);
     const randomKey = keys[randomIndex];
-    setActiveQuestion(kanaMapper[randomKey]);
+    setActiveKey(randomKey);
   };
 
   const handleKeyPress = (key: string) => {
-    if (!activeQuestion) return;
+    if (!kanaMapper[activeKey]) return;
 
     const selectedAnswer = kanaMapper[key]?.jp;
-    const correctAnswer = activeQuestion.jp;
+    const correctAnswer = kanaMapper[activeKey].jp;
 
     setIsCorrect(selectedAnswer === correctAnswer);
     setShowResult(true);
@@ -96,9 +91,14 @@ export default function QuizKana() {
         handleChange={(newTestMode) => setTestMode(newTestMode)}
       />
       <div className={cn("flex items-center justify-center my-8 text-5xl font-bold", jpFont)}>
-        {activeQuestion?.jp}
+        {kanaMapper[activeKey]?.jp}
       </div>
-      {showResult && <ResultBox isCorrect={isCorrect} answer={activeQuestion?.np || ""} />}
+      {showResult && (
+        <ResultBox
+          isCorrect={isCorrect}
+          answer={isNepali ? kanaMapper[activeKey]?.np : activeKey}
+        />
+      )}
       <Keyboard kanaMapper={kanaMapper} keys={keyboardKeys} onKeyPress={handleKeyPress} />
     </div>
   );

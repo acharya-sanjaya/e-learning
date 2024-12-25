@@ -51,7 +51,7 @@ export default function Kana() {
       <Topic label="Small letters (Yoon)" />
       <Row mapper={kanaMapper} row={["kya", "kyu", "kyo"]} />
       <Row mapper={kanaMapper} row={["sya", "syu", "syo"]} />
-      <Row mapper={kanaMapper} row={["tya", "tyu", "tyo"]} />
+      <Row mapper={kanaMapper} row={["chya", "chyu", "chyo"]} />
       <Row mapper={kanaMapper} row={["nya", "nyu", "nyo"]} />
       <Row mapper={kanaMapper} row={["hya", "hyu", "hyo"]} />
       <Row mapper={kanaMapper} row={["mya", "myu", "myo"]} />

@@ -43,7 +43,7 @@ const PageHeader = ({iconName = "arrowLeft", label, labelClassName}: PageHeaderP
             setShowMenu(true);
           }}
           iconName="hamburger"
-          className="size-10 absolute right-8 border-2 border-gray-300 p-1.5 rounded-lg active:bg-blue-500"
+          className="size-10 absolute right-4 border-2 border-gray-300 p-1.5 rounded-lg active:bg-blue-500"
         />
       </div>
       <div

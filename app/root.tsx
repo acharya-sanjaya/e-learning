@@ -5,7 +5,7 @@ import AppContextProvider from "./context/AppContextProvider";
 
 export function Layout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-gray-100 dark:bg-slate-900">
       <head>
         <meta charSet="utf-8" />
         <meta
@@ -15,7 +15,7 @@ export function Layout({children}: {children: React.ReactNode}) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-gray-100 dark:bg-slate-900 text-slate-800 dark:text-gray-200">
         {children}
         <ScrollRestoration />
         <Scripts />

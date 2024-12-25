@@ -23,9 +23,9 @@ const Select = ({
   labelClassName,
   switchSize = 50,
   bgOn = "bg-blue-400",
-  bgOff = "bg-gray-300 dark:bg-gray-500",
+  bgOff = "bg-gray-400",
   borderOn = "border-blue-400",
-  borderOff = "border-gray-300 dark:border-gray-500",
+  borderOff = "border-gray-400",
 }: SelectProps) => {
   switchSize < 0 && 0;
   return (

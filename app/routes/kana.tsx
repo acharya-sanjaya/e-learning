@@ -54,7 +54,7 @@ export default function Kana() {
         ))}
       </KanaTableWrapper>
 
-      <Topic label="Tenten (“) and Maru (˚) (Dakuon and Handakuon) of Small letters" />
+      <Topic label="Tenten (“) and Maru (˚) of Small letters" />
       <KanaTableWrapper>
         {yoonTenTenMaruKeyboardKeys.map((row, i) => (
           <Row key={i} mapper={kanaMapper} row={row} bt={i !== 0} />
@@ -76,7 +76,9 @@ const Row = ({row, mapper, bt}: RowProps) => {
   const {jpFont, romajiStatus, isNepali} = usePreference();
 
   return (
-    <div className={cn("flex", jpFont, bt && "border-t border-t-gray-300 dark:border-t-gray-700")}>
+    <div
+      className={cn("flex", jpFont, bt && "border-t-2 border-t-gray-400 dark:border-t-slate-700")}
+    >
       {row.map((letter, i) => {
         return (
           <div
@@ -84,8 +86,8 @@ const Row = ({row, mapper, bt}: RowProps) => {
             className={cn(
               "flex flex-col flex-1 items-center justify-center text-3xl p-2",
               jpFont,
-              i > 0 && "border-l border-l-gray-300 dark:border-l-gray-700",
-              letter !== "" && "hover:cursor-pointer hover:bg-blue-500 hover:text-white"
+              i > 0 && "border-l-2 border-l-gray-400 dark:border-l-slate-700",
+              letter !== "" && "hover:cursor-pointer hover:bg-blue-500 hover:text-gray-300"
             )}
           >
             {romajiStatus && (isNepali ? <div>{mapper[letter]?.np}</div> : <div>{letter}</div>)}
@@ -98,7 +100,7 @@ const Row = ({row, mapper, bt}: RowProps) => {
 };
 
 const KanaTableWrapper = ({children}: {children: React.ReactNode}) => (
-  <div className="flex flex-col border border-gray-300 dark:border-gray-700 rounded-xl mt-2 mb-20 overflow-hidden">
+  <div className="flex flex-col border-2 border-gray-400 dark:border-slate-700 rounded-xl mt-2 mb-20 overflow-hidden">
     {children}
   </div>
 );

@@ -13,7 +13,7 @@ export default function Translate() {
   const {jpFont} = usePreference();
 
   const translateText = (input: string) => {
-    const vowels = new Set(["a", "e", "i", "o", "u"]);
+    const vowels = new Set(["a", "e", "i", "o", "u", "."]);
     const noSpaceText = input
       .replace(/[\\-]+/g, "")
       .replace(/\s+/g, "")
@@ -25,10 +25,13 @@ export default function Translate() {
       romajiChunk += noSpaceText[i];
 
       if (vowels.has(noSpaceText[i]) || i === noSpaceText.length - 1) {
+        if (romajiChunk.endsWith(".")) {
+          romajiChunk = romajiChunk.slice(0, -1);
+        }
         if (romajiChunk.length > 1 && romajiChunk[0] === romajiChunk[1]) {
           const actualChunk = romajiChunk.slice(1);
           result += kanaMapper[actualChunk]?.jp
-            ? kanaMapper["chu"]?.jp + kanaMapper[actualChunk]?.jp
+            ? kanaMapper["s_tsu"]?.jp + kanaMapper[actualChunk]?.jp
             : actualChunk[0] + actualChunk;
         } else {
           result += kanaMapper[romajiChunk]?.jp ?? romajiChunk;
@@ -59,7 +62,7 @@ export default function Translate() {
       <div className="text-2xl">Enter Romaji</div>
       <input
         type="text"
-        className="p-4 text-xl rounded-xl outline-none border border-gray-300 dark:border-gray-600 focus:border-blue-500"
+        className="p-4 text-xl rounded-xl outline-none border border-gray-300 dark:border-slate-700 focus:border-blue-500 bg-gray-200 dark:bg-slate-800"
         value={textEn}
         onChange={(e) => setTextEn(e.target.value)}
       />
@@ -72,7 +75,7 @@ export default function Translate() {
         readOnly
         value={translatedText}
         className={cn(
-          "p-4 text-5xl rounded-xl outline-none border border-gray-300 dark:border-gray-600 focus:border-blue-500",
+          "p-4 text-5xl rounded-xl outline-none border border-gray-300 dark:border-slate-700 focus:border-blue-500 bg-gray-200 dark:bg-slate-800",
           jpFont
         )}
       ></textarea>

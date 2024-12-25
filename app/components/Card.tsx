@@ -21,7 +21,7 @@ export default function Card({label, href, heightTw = "h-40"}: CardProps) {
       onKeyDown={(e) => e.key in ["Enter", " "] && visit()}
       onClick={visit}
       className={cn(
-        "flex items-center justify-center text-center select-none bg-gray-200 dark:bg-slate-900 border-4 border-slate-800 rounded-xl text-2xl font-bold",
+        "flex items-center justify-center text-center select-none bg-gray-200 dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-700 rounded-xl text-2xl font-bold",
         href && "active:scale-95",
         heightTw
       )}

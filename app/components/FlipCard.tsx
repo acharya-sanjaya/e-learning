@@ -27,7 +27,7 @@ export default function FlipCard({front, back}: FlipCardProps) {
         }}
       >
         <div
-          className="absolute w-full h-full bg-gray-100 dark:bg-slate-900 flex flex-col gap-4 items-center justify-center rounded-lg p-4 overflow-hidden border border-gray-400 dark:border-gray-700"
+          className="absolute w-full h-full flex flex-col gap-4 items-center justify-center rounded-lg p-4 overflow-hidden border-2 border-gray-400 dark:border-slate-700"
           style={{
             backfaceVisibility: "hidden",
             wordBreak: "break-word",
@@ -37,7 +37,7 @@ export default function FlipCard({front, back}: FlipCardProps) {
         </div>
 
         <div
-          className="absolute w-full h-full bg-gray-200 dark:bg-slate-800 flex flex-col gap-1 items-center justify-center rounded-lg p-5 overflow-hidden border border-gray-700"
+          className="absolute w-full h-full bg-gray-300 dark:bg-slate-800 flex flex-col gap-1 items-center justify-center rounded-lg p-5 overflow-hidden border-2 border-gray-400 dark:border-slate-700"
           style={{
             backfaceVisibility: "hidden",
             transform: `rotateY(180deg)`,

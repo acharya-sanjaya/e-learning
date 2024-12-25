@@ -90,7 +90,7 @@ const Quiz = () => {
           style={{width: `${((activeIndex + 1) * 100) / questionList.length}%`}}
         ></div>
       </div>
-      <div className="bg-gray-100 dark:bg-slate-800 my-4 py-10 text-center text-lg rounded-lg">
+      <div className="bg-gray-300 dark:bg-slate-800 my-4 py-10 text-center text-lg rounded-lg">
         {questionList[activeIndex].question}
       </div>
       <div>

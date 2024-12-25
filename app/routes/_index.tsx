@@ -18,7 +18,7 @@ export default function Index() {
         <Card label="Particles" />
         <Card label="Greetings" />
         <Card href="meaningLessons" label="Meanings" />
-        <Card label="Lesson" />
+        <Card href="bookLessons" label="Lesson" />
         <Card href="translate" label="Translate" />
         <Card label="Quiz" href="quiz" />
       </div>

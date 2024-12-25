@@ -29,7 +29,7 @@ const PageHeader = ({iconName = "arrowLeft", label, labelClassName}: PageHeaderP
 
   return (
     <div className="relative z-[999]">
-      <div className="fixed inset-0 w-screen flex justify-center items-center h-20 backdrop-blur-md border-b-2 border-b-gray-100 dark:border-b-gray-800">
+      <div className="fixed inset-0 w-full flex justify-center items-center h-20 backdrop-blur-md border-b-2 border-b-gray-300 dark:border-b-slate-700">
         <Icon
           onClick={() => {
             navigate(-1);
@@ -43,7 +43,7 @@ const PageHeader = ({iconName = "arrowLeft", label, labelClassName}: PageHeaderP
             setShowMenu(true);
           }}
           iconName="hamburger"
-          className="size-10 absolute right-4 border-2 border-gray-300 p-1.5 rounded-lg active:bg-blue-500"
+          className="size-10 absolute right-4 border-2 border-slate-800 dark:border-gray-200 p-1.5 rounded-lg active:bg-blue-500"
         />
       </div>
       <div

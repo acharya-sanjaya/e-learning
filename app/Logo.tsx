@@ -41,7 +41,7 @@ const Logo = () => {
     }, 7 * animationTime);
 
     const timeoutFillColor = setTimeout(() => {
-      setFillLogo("fill-black dark:fill-white");
+      setFillLogo("fill-slate-900 dark:fill-gray-100");
       setZoom("scale-110");
     }, 8 * animationTime);
 
@@ -81,7 +81,7 @@ const Logo = () => {
     >
       <g
         transform="translate(0, 115) scale(0.1, -0.1)"
-        className={cn("stroke-black dark:stroke-white", fillLogo)}
+        className={cn("stroke-slate-900 dark:stroke-gray-100", fillLogo)}
         strokeWidth={15}
       >
         <path

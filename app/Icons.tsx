@@ -67,7 +67,7 @@ const Icon = ({thickness = 2, ...props}: IconProps) => (
     strokeLinejoin="round"
     className={cn(
       props.className,
-      "cursor-pointer active:scale-90 stroke-gray-800 dark:stroke-gray-300"
+      "cursor-pointer active:scale-90 stroke-gray-800 dark:stroke-gray-200"
     )}
     onClick={props.onClick}
   >

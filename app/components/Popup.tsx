@@ -24,7 +24,7 @@ const Popup = ({
 
   const closePopup = () => {
     setSlideUp(false);
-    // Sliding down make take a while
+    // Sliding down may take a while
     // So, call onClose after a delay
     setTimeout(() => {
       onClose();

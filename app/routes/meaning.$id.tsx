@@ -39,7 +39,7 @@ export default function Meaning() {
 
   return (
     <div className="p-4">
-      <PageHeader iconName="close" label={`Lesson ${id}`} labelClassName="text-lg" />
+      <PageHeader iconName="close" label={`Lesson ${id}`} />
       <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(160px,1fr))]">
         {words.map((word, index) => (
           <FlipCard

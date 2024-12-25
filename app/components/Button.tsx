@@ -24,30 +24,31 @@ const Button = ({
   if (!visible) return null;
 
   const variantStyles: Record<string, string> = {
-    standard: "bg-gradient-to-tr from-blue-400 to-blue-600 text-white",
-    primary: "bg-gradient-to-tr from-indigo-500 to-purple-600 text-white",
-    success: "bg-gradient-to-tr from-green-400 to-green-600 text-white",
-    golden: "bg-gradient-to-tr from-yellow-400 to-yellow-600 text-white",
-    danger: "bg-gradient-to-tr from-red-400 to-red-600 text-white",
-    info: "bg-gradient-to-tr from-teal-400 to-cyan-500 text-white",
-    warning: "bg-gradient-to-tr from-orange-400 to-amber-500 text-white",
+    standard: "from-blue-400 to-blue-600 text-gray-100",
+    primary: "from-indigo-500 to-purple-600 text-gray-100",
+    success: "from-green-400 to-green-600 text-gray-100",
+    golden: "from-yellow-400 to-yellow-600 text-gray-100",
+    danger: "from-red-400 to-red-600 text-gray-100",
+    info: "from-teal-400 to-cyan-500 text-gray-100",
+    warning: "from-orange-400 to-amber-500 text-gray-100",
   };
 
   const shouldUseVariant = !isDisabled && !isActive;
-  const isFunctional = isActive || isDisabled;
+  const isNonFunctional = isActive || isDisabled || onClick === undefined;
 
   return (
     <button
       className={cn(
-        "py-2 px-5 text-lg rounded-xl font-bold",
+        "py-2 px-5 text-lg rounded-xl font-bold bg-gradient-to-tr",
         shouldUseVariant && variantStyles[variant],
-        shouldUseVariant && "active:scale-90",
+        !isNonFunctional && "active:scale-90",
         isActive &&
-          "bg-gradient-to-tr from-gray-600 to-gray-800 dark:from-gray-100 dark:to-gray-300 text-white dark:text-black",
-        isDisabled && "cursor-not-allowed bg-gray-400/70 text-white",
+          "from-slate-600 to-slate-800 dark:from-gray-200 dark:to-gray-200 text-gray-300 dark:text-slate-900",
+        isDisabled &&
+          "cursor-not-allowed from-gray-300 to-gray-300 dark:from-slate-800 dark:to-slate-800 text-gray-400 dark:text-slate-500",
         className
       )}
-      onClick={isFunctional ? undefined : onClick}
+      onClick={isNonFunctional ? undefined : onClick}
     >
       {label}
     </button>

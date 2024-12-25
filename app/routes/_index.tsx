@@ -12,6 +12,7 @@ export default function Index() {
       <PageHeader label="Nihongo" />
       <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
         <Card href="kana" label="Kana" />
+        <Card href="quiz/kana" label="Kana Quiz" />
         <Card label="Numbers" />
         <Card label="Time" />
         <Card label="Particles" />

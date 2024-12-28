@@ -53,7 +53,9 @@ export default function Meaning() {
                     {word.jp}
                   </div>
                 )}
-                {romajiStatus && !showKanji && <div className="text-center">{word.romaji}</div>}
+                {romajiStatus && !showKanji && (
+                  <div className="text-center">{word.romaji.toLowerCase()}</div>
+                )}
               </>
             }
             back={
@@ -61,7 +63,7 @@ export default function Meaning() {
                 {isNepali ? (
                   <div className="text-center text-xl">{word.np}</div>
                 ) : (
-                  <div className="text-center text-xl">{word.en}</div>
+                  <div className="text-center text-xl">{word.en.toLowerCase()}</div>
                 )}
               </>
             }

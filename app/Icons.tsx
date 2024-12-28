@@ -43,6 +43,12 @@ const iconMapper = {
       <line x1="4" x2="20" y1="18" y2="18" />
     </>
   ),
+  refresh: (
+    <>
+      <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+      <path d="M21 3v5h-5" />{" "}
+    </>
+  ),
 } as const;
 
 export type IconNameType = keyof typeof iconMapper;
@@ -67,7 +73,8 @@ const Icon = ({thickness = 2, ...props}: IconProps) => (
     strokeLinejoin="round"
     className={cn(
       props.className,
-      "cursor-pointer active:scale-90 stroke-gray-800 dark:stroke-gray-200"
+      "cursor-pointer stroke-gray-800 dark:stroke-gray-200",
+      props.onClick && "active:scale-90"
     )}
     onClick={props.onClick}
   >

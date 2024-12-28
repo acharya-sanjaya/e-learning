@@ -1,16 +1,17 @@
 import Card from "~/components/Card";
 import GridContainer from "~/components/GridContainer";
 import PageHeader from "~/components/PageHeader";
+import availavleLessons from "~/data/japanese/dictionary/availavleLessons";
 
 export default function MeaningLessons() {
   return (
     <div className="p-4">
       <PageHeader label="Meanings" />
       <GridContainer>
-        <>
-          <Card href="../meaning/01" label="Lesson 1" />
-          <Card label="Working on other Lessons" />
-        </>
+        {availavleLessons.map((lesson) => (
+          <Card key={`lesson-${lesson}`} href={`../meaning/${lesson}`} label={`Lesson ${lesson}`} />
+        ))}
+        <Card label="Working on other Lessons" />
       </GridContainer>
     </div>
   );

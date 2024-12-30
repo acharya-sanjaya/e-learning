@@ -115,7 +115,7 @@ const Option = ({id, choice, answer, handleClick, value}: OptionProps) => {
       onKeyDown={(e) => e.key in ["Enter", " "] && handleClick()}
       onClick={choice ? undefined : handleClick}
       className={cn(
-        "font-bold text-sm text-center sm:text-left px-4 py-2 bg-black/10 dark:bg-white/10 rounded-lg",
+        "font-bold text-sm text-center sm:text-left p-4 bg-black/10 dark:bg-white/10 rounded-lg",
         choice && "cursor-not-allowed",
         id === choice && id !== answer && "bg-red-500 dark:bg-red-600 text-white",
         choice && id === answer && "bg-green-500 dark:bg-green-600"

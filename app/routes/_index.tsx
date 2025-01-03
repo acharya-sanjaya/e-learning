@@ -21,6 +21,7 @@ export default function Index() {
         <Card href="bookLessons" label="Lesson" />
         <Card href="translate" label="Translate" />
         <Card label="Quiz" href="quiz" />
+        <Card label="NEC Notes" href="nec-summary-paths" />
         <Card label="NEC Quiz" href="quiz/nec" />
       </div>
     </div>

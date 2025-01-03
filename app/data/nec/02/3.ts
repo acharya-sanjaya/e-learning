@@ -1,31 +1,6 @@
 const data = {
-  pageTitle: "Quiz: 1.3",
-  questions: [
-    {
-      qn: "Random Question",
-      a: "Answer a",
-      b: "Answer b",
-      c: "Answer c",
-      d: "Answer d",
-      answer: "a",
-    },
-    {
-      qn: "Random Question",
-      a: "Answer a",
-      b: "Answer b",
-      c: "Answer c",
-      d: "Answer d",
-      answer: "d",
-    },
-    {
-      qn: "Random Question",
-      a: "Answer a",
-      b: "Answer b",
-      c: "Answer c",
-      d: "Answer d",
-      answer: "c",
-    },
-  ],
+  pageTitle: "Quiz: 2.3",
+  questions: [],
 };
 
 export default data;

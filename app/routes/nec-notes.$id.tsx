@@ -94,6 +94,7 @@ export const Description = ({description}: {description: string[]}) =>
           "text-sm",
           desc[0] === "-" && "list-none ml-4",
           desc[0] === " " && "list-none",
+          desc[1] === "-" && "ml-8",
           desc.endsWith(":") && "text-lg font-bold"
         )}
       >

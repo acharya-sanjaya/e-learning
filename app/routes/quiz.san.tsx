@@ -2,9 +2,9 @@ import {useState} from "react";
 import Menu from "~/components/quiz/Menu";
 import Question from "~/components/quiz/Question";
 import dsaData from "~/data/san-quiz/dsa";
-import javaData from "~/data/san-quiz/java";
-const questions = [dsaData, javaData];
-const sets = ["DSA", "Java"];
+import necModel from "~/data/san-quiz/nec";
+const questions = [dsaData, necModel];
+const sets = ["DSA", "Nec Model"];
 export default function QuizSan() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeQuestions, setActiveQuestions] = useState(questions[0]);

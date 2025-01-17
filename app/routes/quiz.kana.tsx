@@ -2,8 +2,8 @@ import {useEffect, useState} from "react";
 import PageHeader from "~/components/PageHeader";
 import Select from "~/components/Select";
 import Tabs from "~/components/Tabs";
-import hiraganaMapper from "~/data/japanese/kana/hiragana";
-import katakanaMapper, {KanaType} from "~/data/japanese/kana/katakana";
+import hiraganaMapper from "~/data/kana/hiragana";
+import katakanaMapper, {KanaType} from "~/data/kana/katakana";
 import {
   kanaKeyboardKeys,
   kanaKeys,
@@ -11,7 +11,7 @@ import {
   smallLetterKeys,
   tentenMaruKeyboardKeys,
   tentenMaruKeys,
-} from "~/data/japanese/kana/quizKeys";
+} from "~/data/kana/quizKeys";
 
 import usePreference from "~/hooks/usePreference";
 import {cn, getRandomInt} from "~/lib/utils";

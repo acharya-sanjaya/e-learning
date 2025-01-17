@@ -1,7 +1,7 @@
 import Card from "~/components/Card";
 import GridContainer from "~/components/GridContainer";
 import PageHeader from "~/components/PageHeader";
-import availavleLessons from "~/data/japanese/dictionary/availavleLessons";
+import availavleLessons from "~/data/dictionary/availavleLessons";
 
 export default function MeaningLessons() {
   return (

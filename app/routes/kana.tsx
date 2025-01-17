@@ -1,12 +1,12 @@
 import {useState} from "react";
-import hiraganaMapper from "~/data/japanese/kana/hiragana";
-import katakanaMapper from "~/data/japanese/kana/katakana";
+import hiraganaMapper from "~/data/kana/hiragana";
+import katakanaMapper from "~/data/kana/katakana";
 import {
   kanaKeyboardKeys,
   tentenMaruKeyboardKeys,
   yoonKeyboardKeys,
   yoonTenTenMaruKeyboardKeys,
-} from "~/data/japanese/kana/quizKeys";
+} from "~/data/kana/quizKeys";
 import PageHeader from "~/components/PageHeader";
 import Select from "~/components/Select";
 

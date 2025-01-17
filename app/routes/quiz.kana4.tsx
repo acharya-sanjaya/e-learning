@@ -2,9 +2,9 @@ import {useRef, useState} from "react";
 import Button from "~/components/Button";
 import PageHeader from "~/components/PageHeader";
 import Popup from "~/components/Popup";
-import chapter1 from "~/data/japanese/verbs-part1";
-import chapter2 from "~/data/japanese/verbs-part2";
-import chapter3 from "~/data/japanese/verbs-part3";
+import chapter1 from "~/data/verbs-part1";
+import chapter2 from "~/data/verbs-part2";
+import chapter3 from "~/data/verbs-part3";
 
 import {cn} from "~/lib/utils";
 

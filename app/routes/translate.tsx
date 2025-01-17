@@ -1,8 +1,8 @@
 import {useState} from "react";
 import PageHeader from "~/components/PageHeader";
 import Select from "~/components/Select";
-import hiraganaMapper from "~/data/japanese/kana/hiragana";
-import katakanaMapper from "~/data/japanese/kana/katakana";
+import hiraganaMapper from "~/data/kana/hiragana";
+import katakanaMapper from "~/data/kana/katakana";
 import usePreference from "~/hooks/usePreference";
 import {cn} from "~/lib/utils";
 

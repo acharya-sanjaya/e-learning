@@ -25,7 +25,7 @@ export const loader: LoaderFunction = async ({params}) => {
   if (!id) throw new Error("Lesson ID is required.");
 
   try {
-    const words = (await import(`../data/japanese/dictionary/Lesson${id}.ts`)).default;
+    const words = (await import(`../data/dictionary/Lesson${id}.ts`)).default;
 
     return json({words, id: Number(id)});
   } catch (e) {

@@ -296,8 +296,8 @@ const words = [
   {
     en: "In future, expecting your help",
     np: "सहयोगको आशा",
-    jp: "これから おせわに（お世話に) なります",
-    kanji: "これから おせわに（お世話に) なります",
+    jp: "これから おせわに なります",
+    kanji: "これから お世話に なります",
     romaji: "Korekara osewani narimasu",
   },
   {

@@ -16,15 +16,15 @@ const Menu = ({items, activeIndex = 0, handleChangeItem}: MenuProps) => {
 
   return (
     <div className="relative z-[999]">
-      <div className="fixed inset-0 w-full flex justify-center items-center h-20 backdrop-blur-md border-b-2 border-b-gray-300 dark:border-b-slate-700">
+      <div className="fixed inset-0 flex h-20 w-full items-center justify-center border-b-2 border-b-gray-300 backdrop-blur-md dark:border-b-slate-700">
         <Icon
           onClick={() => {
             navigate(-1);
           }}
           iconName="arrowLeft"
-          className="size-8 absolute left-4 active:stroke-blue-500"
+          className="absolute left-4 size-8 active:stroke-blue-500"
         />
-        <div className="text-3xl text-center font-bold select-none mx-20 line-clamp-1">
+        <div className="mx-20 line-clamp-1 select-none text-center text-3xl font-bold">
           {items[activeIndex]}
         </div>
 
@@ -33,18 +33,18 @@ const Menu = ({items, activeIndex = 0, handleChangeItem}: MenuProps) => {
             setShowMenu(true);
           }}
           iconName="hamburger"
-          className="size-10 absolute right-4 border-2 border-slate-800 dark:border-gray-200 p-1.5 rounded-lg active:bg-blue-500"
+          className="absolute right-4 size-10 rounded-lg border-2 border-slate-800 p-1.5 active:bg-blue-500 dark:border-gray-200"
         />
       </div>
       <div
         className={cn(
-          "fixed top-0 right-0 p-4 flex flex-col items-center gap-2 w-screen md:w-[400px] h-screen z-10 backdrop-blur-md transition-transform duration-500",
-          showMenu ? "translate-x-0" : "translate-x-full"
+          "fixed right-0 top-0 z-10 flex h-screen w-screen flex-col items-center gap-2 p-4 backdrop-blur-md transition-transform duration-500 md:w-[400px]",
+          showMenu ? "translate-x-0" : "translate-x-full",
         )}
       >
         <Icon
           iconName="close"
-          className="size-10 ml-auto backdrop:block"
+          className="ml-auto size-10 backdrop:block"
           thickness={2}
           onClick={() => {
             setShowMenu(false);
@@ -62,7 +62,7 @@ const Menu = ({items, activeIndex = 0, handleChangeItem}: MenuProps) => {
           />
         ))}
         <div
-          className="flex-1 w-full"
+          className="w-full flex-1"
           role="button"
           tabIndex={0}
           onKeyDown={(e) => e}

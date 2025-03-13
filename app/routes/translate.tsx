@@ -45,7 +45,7 @@ export default function Translate() {
 
   const translatedText = translateText(textEn);
   return (
-    <div className="flex flex-col gap-2 p-4 m-auto w-full max-w-[400px]">
+    <div className="m-auto flex w-full max-w-[400px] flex-col gap-2 p-4">
       <PageHeader iconName="close" label="Translate" labelClassName="text-3xl" />
       <Select
         value={mode}
@@ -62,7 +62,7 @@ export default function Translate() {
       <div className="text-2xl">Enter Romaji</div>
       <input
         type="text"
-        className="p-4 text-xl rounded-xl outline-none border border-gray-300 dark:border-slate-700 focus:border-blue-500 bg-gray-200 dark:bg-slate-800"
+        className="rounded-xl border border-gray-300 bg-gray-200 p-4 text-xl outline-none focus:border-blue-500 dark:border-slate-700 dark:bg-slate-800"
         value={textEn}
         onChange={(e) => setTextEn(e.target.value)}
       />
@@ -75,8 +75,8 @@ export default function Translate() {
         readOnly
         value={translatedText}
         className={cn(
-          "p-4 text-5xl rounded-xl outline-none border border-gray-300 dark:border-slate-700 focus:border-blue-500 bg-gray-200 dark:bg-slate-800",
-          jpFont
+          "rounded-xl border border-gray-300 bg-gray-200 p-4 text-5xl outline-none focus:border-blue-500 dark:border-slate-700 dark:bg-slate-800",
+          jpFont,
         )}
       ></textarea>
     </div>

@@ -45,13 +45,19 @@ const Logo = () => {
       setZoom("scale-110");
     }, 8 * animationTime);
 
-    const timeoutZoomIn = setTimeout(() => {
-      setZoom("scale-110");
-    }, 8 * animationTime + 70);
+    const timeoutZoomIn = setTimeout(
+      () => {
+        setZoom("scale-110");
+      },
+      8 * animationTime + 70,
+    );
 
-    const timeoutZoomOut = setTimeout(() => {
-      setZoom("scale-100");
-    }, 8 * animationTime + 220);
+    const timeoutZoomOut = setTimeout(
+      () => {
+        setZoom("scale-100");
+      },
+      8 * animationTime + 220,
+    );
 
     return () => {
       clearTimeout(timeoutP1);
@@ -76,7 +82,7 @@ const Logo = () => {
       width={300}
       height={115}
       viewBox="0 0 300 115"
-      className={cn(zoom, "transition-all ease-linear duration-150")}
+      className={cn(zoom, "transition-all duration-150 ease-linear")}
       preserveAspectRatio="xMidYMid meet"
     >
       <g

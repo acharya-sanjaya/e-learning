@@ -30,21 +30,21 @@ const Select = ({
   switchSize < 0 && 0;
   return (
     <div
-      className={cn("flex items-center gap-4 w-fit", className)}
+      className={cn("flex w-fit items-center gap-4", className)}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key in ["Enter", " "] && handleChange()}
       onClick={handleChange}
     >
       <div
-        className="w-12 h-6 rounded-full overflow-hidden"
+        className="h-6 w-12 overflow-hidden rounded-full"
         style={{
           width: switchSize,
           height: switchSize / 2,
         }}
       >
         <div
-          className={cn("relative flex justify-center h-full rounded-full transition-transform")}
+          className={cn("relative flex h-full justify-center rounded-full transition-transform")}
           style={{
             width: switchSize * 1.5,
             height: switchSize / 2,
@@ -55,8 +55,8 @@ const Select = ({
           <div className={cn("w-1/2", bgOff)}></div>
           <div
             className={cn(
-              "absolute h-full bg-gray-100 rounded-full border-4",
-              value ? borderOn : borderOff
+              "absolute h-full rounded-full border-4 bg-gray-100",
+              value ? borderOn : borderOff,
             )}
             style={{
               width: switchSize / 2,

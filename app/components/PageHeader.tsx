@@ -37,20 +37,20 @@ const PageHeader = ({
 
   return (
     <div className="relative z-[999]">
-      <div className="fixed inset-0 w-full flex justify-center items-center h-20 backdrop-blur-md border-b-2 border-b-gray-300 dark:border-b-slate-700">
+      <div className="fixed inset-0 flex h-20 w-full items-center justify-center border-b-2 border-b-gray-300 backdrop-blur-md dark:border-b-slate-700">
         {goBack && (
           <Icon
             onClick={() => {
               navigate(-1);
             }}
             iconName={iconName}
-            className="size-8 absolute left-4 active:stroke-blue-500"
+            className="absolute left-4 size-8 active:stroke-blue-500"
           />
         )}
         <div
           className={cn(
-            "text-3xl text-center font-bold select-none mx-20 line-clamp-1",
-            labelClassName
+            "mx-20 line-clamp-1 select-none text-center text-3xl font-bold",
+            labelClassName,
           )}
         >
           {label}
@@ -61,19 +61,19 @@ const PageHeader = ({
               setShowMenu(true);
             }}
             iconName="hamburger"
-            className="size-10 absolute right-4 border-2 border-slate-800 dark:border-gray-200 p-1.5 rounded-lg active:bg-blue-500"
+            className="absolute right-4 size-10 rounded-lg border-2 border-slate-800 p-1.5 active:bg-blue-500 dark:border-gray-200"
           />
         )}
       </div>
       <div
         className={cn(
-          "fixed top-0 right-0 p-4 flex flex-col items-center gap-2 w-screen md:w-[400px] h-screen z-10 backdrop-blur-md transition-transform duration-500",
-          showMenu ? "translate-x-0" : "translate-x-full"
+          "fixed right-0 top-0 z-10 flex h-screen w-screen flex-col items-center gap-2 p-4 backdrop-blur-md transition-transform duration-500 md:w-[400px]",
+          showMenu ? "translate-x-0" : "translate-x-full",
         )}
       >
         <Icon
           iconName="close"
-          className="size-10 ml-auto backdrop:block"
+          className="ml-auto size-10 backdrop:block"
           thickness={2}
           onClick={() => {
             setShowMenu(false);
@@ -102,7 +102,7 @@ const PageHeader = ({
         />
         <FontDropdown activeFont={jpFont} handleChangeFont={setJpFont} />
         <div
-          className="flex-1 w-full"
+          className="w-full flex-1"
           role="button"
           tabIndex={0}
           onKeyDown={(e) => e}
@@ -129,9 +129,9 @@ const FontDropdown = ({
   const [dropFonts, setDropFonts] = useState(false);
 
   return (
-    <div className="relative w-full my-2">
+    <div className="relative my-2 w-full">
       <div
-        className="flex justify-between items-center py-2"
+        className="flex items-center justify-between py-2"
         role="button"
         tabIndex={0}
         onKeyDown={(e) => e.key in ["Enter", " "] && setDropFonts((x) => !x)}
@@ -139,18 +139,18 @@ const FontDropdown = ({
           setDropFonts((x) => !x);
         }}
       >
-        <div className="text-3xl select-none">Fonts</div>
+        <div className="select-none text-3xl">Fonts</div>
         <Icon
           iconName="chevronDown"
           thickness={2}
           className={cn("transition-transform duration-300", dropFonts ? "-rotate-180" : "")}
         />
       </div>
-      <div className="absolute w-full h-fit overflow-hidden">
+      <div className="absolute h-fit w-full overflow-hidden">
         <div
           className={cn(
             "flex flex-col gap-2 transition-transform duration-300",
-            dropFonts ? "translate-y-0" : "-translate-y-full"
+            dropFonts ? "translate-y-0" : "-translate-y-full",
           )}
         >
           <Button

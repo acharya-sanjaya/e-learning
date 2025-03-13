@@ -8,7 +8,7 @@ interface TabsProps {
 }
 export default function Tabs({options, activeIndex, handleChange, className}: TabsProps) {
   return (
-    <div className="flex w-fit h-fit rounded-full overflow-hidden border border-gray-100 dark:border-slate-900 flex-nowrap">
+    <div className="flex h-fit w-fit flex-nowrap overflow-hidden rounded-full border border-gray-100 dark:border-slate-900">
       {options.map((option, index) => (
         <div
           role="button"
@@ -16,12 +16,12 @@ export default function Tabs({options, activeIndex, handleChange, className}: Ta
           onKeyDown={(e) => e.key in ["Enter", " "] && handleChange(option)}
           key={option}
           className={cn(
-            "font-bold text-sm select-none flex items-center px-4 py-2",
+            "flex select-none items-center px-4 py-2 text-sm font-bold",
             index > 0 && "border-l-2 border-l-gray-100 dark:border-l-slate-900",
             activeIndex === index
               ? "bg-slate-900 text-gray-100 dark:bg-gray-100 dark:text-slate-900"
               : "bg-gray-300 dark:bg-slate-700",
-            className
+            className,
           )}
           onClick={() => handleChange(option)}
         >

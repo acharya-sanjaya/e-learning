@@ -12,7 +12,7 @@ export default function Explanation({text}: ExplanationProps) {
   return (
     <div className="flex flex-col items-start gap-1">
       <Button
-        className="text-sm px-4 py-2 rounded-md"
+        className="rounded-md px-4 py-2 text-sm"
         variant="primary"
         label="Explanation"
         onClick={toogleShow}

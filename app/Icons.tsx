@@ -72,14 +72,14 @@ const Icon = ({thickness = 2, ...props}: IconProps) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     className={cn(
-      props.className,
       "cursor-pointer stroke-gray-800 dark:stroke-gray-200",
-      props.onClick && "active:scale-90"
+      props.className,
+      props.onClick && "active:scale-90",
     )}
     onClick={props.onClick}
   >
     {iconMapper[props.iconName] ?? (
-      <div className={cn(props.className, "flex justify-center items-center size-full")}>
+      <div className={cn(props.className, "flex size-full items-center justify-center")}>
         Icon not found
       </div>
     )}

@@ -41,22 +41,18 @@ const Quiz = () => {
   };
 
   return (
-    <div
-      className="w-svw h-svh max-w-[400px] m-auto flex flex-col
-      gap-3
-     dark:bg-slate-900 dark:text-white p-4 "
-    >
+    <div className="m-auto flex h-svh w-svw max-w-[400px] flex-col gap-3 p-4 dark:bg-slate-900 dark:text-white">
       <PageHeader iconName="close" label="Quiz" labelClassName="text-3xl" />
-      <div className="flex w-full gap-2 justify-end text-xl items-center">
+      <div className="flex w-full items-center justify-end gap-2 text-xl">
         <Button
           visible={activeIndex !== (jumpTo as number) - 1}
           label="Save"
           variant="success"
-          className="px-4 py-1 rounded-xl text-sm"
+          className="rounded-xl px-4 py-1 text-sm"
           // no onClick event as  inputfield's onBlur event handles everything
         />
         <input
-          className="w-12 text-center bg-transparent outline-none focus:border focus:border-gray-500"
+          className="w-12 bg-transparent text-center outline-none focus:border focus:border-gray-500"
           type="text"
           inputMode="numeric"
           value={jumpTo}
@@ -84,20 +80,20 @@ const Quiz = () => {
         />
         <div>/ {questionList.length}</div>
       </div>
-      <div className="w-full h-2 bg-gray-300 dark:bg-gray-700 rounded-full overflow-hidden">
+      <div className="h-2 w-full overflow-hidden rounded-full bg-gray-300 dark:bg-gray-700">
         <div
-          className="h-full bg-green-500 rounded-full transition-all duration-300"
+          className="h-full rounded-full bg-green-500 transition-all duration-300"
           style={{width: `${((activeIndex + 1) * 100) / questionList.length}%`}}
         ></div>
       </div>
-      <div className="bg-gray-300 dark:bg-slate-800 my-4 py-10 text-center text-lg rounded-lg">
+      <div className="my-4 rounded-lg bg-gray-300 py-10 text-center text-lg dark:bg-slate-800">
         {questionList[activeIndex].question}
       </div>
       <div>
         <input
           ref={answerRef}
           type="text"
-          className="w-full p-2 text-center text-lg outline-none border border-gray-500 rounded-xl focus:border-blue-500"
+          className="w-full rounded-xl border border-gray-500 p-2 text-center text-lg outline-none focus:border-blue-500"
           placeholder="Answer"
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
@@ -109,7 +105,7 @@ const Quiz = () => {
         />
       </div>
       <Button label="Submit" onClick={() => triggerPopup()} />
-      <div className="mt-10 max-h-28 items-center flex w-full justify-between flex-wrap gap-4 overflow-y-auto overflow-x-hidden">
+      <div className="mt-10 flex max-h-28 w-full flex-wrap items-center justify-between gap-4 overflow-y-auto overflow-x-hidden">
         <Button label="Set 1" isActive={chapter === 0} onClick={() => changeChapter(0)} />
         <Button label="Set 2" isActive={chapter === 1} onClick={() => changeChapter(1)} />
         <Button label="Set 3" isActive={chapter === 2} onClick={() => changeChapter(2)} />
@@ -156,12 +152,12 @@ const Quiz = () => {
           answerRef.current?.focus();
         }}
       >
-        <div className="flex flex-col gap-4 items-center">
+        <div className="flex flex-col items-center gap-4">
           {!revealAnswer && (
             <div
               className={cn(
-                "text-3xl font-bold py-5",
-                isCorrect ? "text-green-500" : "text-red-500"
+                "py-5 text-3xl font-bold",
+                isCorrect ? "text-green-500" : "text-red-500",
               )}
             >
               {isCorrect ? "Correct" : "Incorrect"}

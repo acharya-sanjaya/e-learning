@@ -214,7 +214,7 @@ const words = [
     np: "उपहार",
     jp: "[お]みやげ",
     kanji: "[お]土産",
-    romaji: "O-miyage",
+    romaji: "O miyage",
   },
   {
     en: "English language",

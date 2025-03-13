@@ -17,10 +17,10 @@ export default function Option({id, selected, answer, text, handleClick}: Option
       onKeyDown={(e) => e.key in ["Enter", " "] && handleClick(id)}
       onClick={selected ? undefined : () => handleClick(id)}
       className={cn(
-        "font-bold text-center sm:text-left px-4 py-3 bg-black/10 dark:bg-white/10 rounded-lg",
+        "rounded-lg bg-black/10 px-4 py-3 text-center font-bold sm:text-left dark:bg-white/10",
         selected && "cursor-not-allowed",
-        id === selected && id !== answer && "bg-red-500 dark:bg-red-600 text-white",
-        selected && id === answer && "bg-green-500 dark:bg-green-600"
+        id === selected && id !== answer && "bg-red-500 text-white dark:bg-red-600",
+        selected && id === answer && "bg-green-500 dark:bg-green-600",
       )}
     >
       {text}

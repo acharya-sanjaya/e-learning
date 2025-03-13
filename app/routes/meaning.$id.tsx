@@ -40,16 +40,25 @@ export default function Meaning() {
   return (
     <div className="p-4">
       <PageHeader iconName="close" label={`Lesson ${id}`} />
-      <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(160px,1fr))]">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4">
         {words.map((word, index) => (
           <FlipCard
             key={index}
             front={
               <>
                 {showKanji ? (
-                  <div className={cn("text-center text-2xl", jpFont)}>{word.kanji}</div>
+                  <div className={cn("text-center text-2xl", jpFont, "font-sans-jp")}>
+                    {word.kanji}
+                  </div>
                 ) : (
-                  <div className={cn("text-center", jpFont, romajiStatus ? "text-lg" : "text-2xl")}>
+                  <div
+                    className={cn(
+                      "text-center",
+                      jpFont,
+                      "font-sans-jp",
+                      romajiStatus ? "text-lg" : "text-2xl",
+                    )}
+                  >
                     {word.jp}
                   </div>
                 )}

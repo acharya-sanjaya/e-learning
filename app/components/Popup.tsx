@@ -40,8 +40,8 @@ const Popup = ({
       onClick={closePopup}
       onKeyDown={(e) => e.key === "Escape" && closePopup()}
       className={cn(
-        "fixed pt-[100svh] bg-white/30 dark:bg-black/30 backdrop-blur-2xl w-svw h-svh top-0 left-1/2 -translate-x-1/2 flex justify-center",
-        className
+        "fixed left-1/2 top-0 flex h-svh w-svw -translate-x-1/2 justify-center bg-white/30 pt-[100svh] backdrop-blur-2xl dark:bg-black/30",
+        className,
       )}
       style={{
         zIndex: 9999,
@@ -50,7 +50,7 @@ const Popup = ({
       <div
         role="none"
         onClick={(event) => event.stopPropagation()}
-        className="cursor-default relative border-2 border-gray-600 rounded-lg p-10 flex justify-center items-center overflow-hidden bg-white/70 dark:bg-black/70"
+        className="relative flex cursor-default items-center justify-center overflow-hidden rounded-lg border-2 border-gray-600 bg-white/70 p-10 dark:bg-black/70"
         style={{
           width: "90%",
           height: "fit-content",
@@ -62,7 +62,7 @@ const Popup = ({
         <Icon
           iconName="close"
           thickness={2}
-          className="cursor-pointer size-10 p-2 absolute top-0.5 right-0.5 active:stroke-red-500"
+          className="absolute right-0.5 top-0.5 size-10 cursor-pointer p-2 active:stroke-red-500"
           onClick={closePopup}
         />
         {children}

@@ -1,5 +1,5 @@
 import {cn} from "~/lib/utils";
-
+6;
 interface ButtonProps {
   visible?: boolean;
   variant?: "standard" | "primary" | "success" | "golden" | "danger" | "info" | "warning";
@@ -39,14 +39,14 @@ const Button = ({
   return (
     <button
       className={cn(
-        "py-2 px-5 text-lg rounded-xl font-bold bg-gradient-to-tr",
+        "rounded-xl bg-gradient-to-tr px-5 py-2 text-lg font-bold",
         shouldUseVariant && variantStyles[variant],
         !isNonFunctional && "active:scale-90",
         isActive &&
-          "from-slate-600 to-slate-800 dark:from-gray-200 dark:to-gray-200 text-gray-300 dark:text-slate-900",
+          "from-slate-600 to-slate-800 text-gray-300 dark:from-gray-200 dark:to-gray-200 dark:text-slate-900",
         isDisabled &&
-          "cursor-not-allowed from-gray-300 to-gray-300 dark:from-slate-800 dark:to-slate-800 text-gray-400 dark:text-slate-500",
-        className
+          "cursor-not-allowed from-gray-300 to-gray-300 text-gray-400 dark:from-slate-800 dark:to-slate-800 dark:text-slate-500",
+        className,
       )}
       onClick={isNonFunctional ? undefined : onClick}
     >

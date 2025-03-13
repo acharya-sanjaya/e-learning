@@ -19,7 +19,7 @@ export default function Kana() {
   const {jpFont} = usePreference();
 
   return (
-    <div className="flex flex-col w-full p-4">
+    <div className="flex w-full flex-col p-4">
       <PageHeader iconName="close" label="Kana" labelClassName="text-3xl" />
       <Select
         value={mode}
@@ -64,7 +64,7 @@ export default function Kana() {
   );
 }
 
-const Topic = ({label}: {label: string}) => <div className="text-3xl font-bold my-1">{label}</div>;
+const Topic = ({label}: {label: string}) => <div className="my-1 text-3xl font-bold">{label}</div>;
 
 interface RowProps {
   row: string[];
@@ -84,10 +84,10 @@ const Row = ({row, mapper, bt}: RowProps) => {
           <div
             key={letter}
             className={cn(
-              "flex flex-col flex-1 items-center justify-center text-3xl p-2",
+              "flex flex-1 flex-col items-center justify-center p-2 text-3xl",
               jpFont,
               i > 0 && "border-l-2 border-l-gray-400 dark:border-l-slate-700",
-              letter !== "" && "hover:cursor-pointer hover:bg-blue-500 hover:text-gray-300"
+              letter !== "" && "hover:cursor-pointer hover:bg-blue-500 hover:text-gray-300",
             )}
           >
             {romajiStatus && (isNepali ? <div>{mapper[letter]?.np}</div> : <div>{letter}</div>)}
@@ -100,7 +100,7 @@ const Row = ({row, mapper, bt}: RowProps) => {
 };
 
 const KanaTableWrapper = ({children}: {children: React.ReactNode}) => (
-  <div className="flex flex-col border-2 border-gray-400 dark:border-slate-700 rounded-xl mt-2 mb-20 overflow-hidden">
+  <div className="mb-20 mt-2 flex flex-col overflow-hidden rounded-xl border-2 border-gray-400 dark:border-slate-700">
     {children}
   </div>
 );

@@ -9,7 +9,7 @@ export default function FlipCard({front, back}: FlipCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   return (
     <div
-      className="relative w-full h-56 text-[14px]"
+      className="relative h-56 w-full text-[14px]"
       style={{
         perspective: "1000px",
       }}
@@ -19,7 +19,7 @@ export default function FlipCard({front, back}: FlipCardProps) {
       onClick={() => setIsFlipped((x) => !x)}
     >
       <div
-        className="absolute w-full h-full transition-transform duration-500"
+        className="absolute h-full w-full transition-transform duration-500"
         style={{
           userSelect: "none",
           transformStyle: "preserve-3d",
@@ -27,7 +27,7 @@ export default function FlipCard({front, back}: FlipCardProps) {
         }}
       >
         <div
-          className="absolute w-full h-full flex flex-col gap-4 items-center justify-center rounded-lg p-4 overflow-hidden border-2 border-gray-400 dark:border-slate-700"
+          className="absolute flex h-full w-full flex-col items-center justify-center gap-4 overflow-hidden rounded-lg border-2 border-gray-400 p-4 dark:border-slate-700"
           style={{
             backfaceVisibility: "hidden",
             wordBreak: "break-word",
@@ -37,7 +37,7 @@ export default function FlipCard({front, back}: FlipCardProps) {
         </div>
 
         <div
-          className="absolute w-full h-full bg-gray-300 dark:bg-slate-800 flex flex-col gap-1 items-center justify-center rounded-lg p-5 overflow-hidden border-2 border-gray-400 dark:border-slate-700"
+          className="absolute flex h-full w-full flex-col items-center justify-center gap-1 overflow-hidden rounded-lg border-2 border-gray-400 bg-gray-300 p-5 dark:border-slate-700 dark:bg-slate-800"
           style={{
             backfaceVisibility: "hidden",
             transform: `rotateY(180deg)`,

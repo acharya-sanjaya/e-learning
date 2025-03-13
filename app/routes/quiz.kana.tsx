@@ -72,7 +72,7 @@ export default function QuizKana() {
   }, [mode, testMode]);
 
   return (
-    <div className="flex flex-col gap-4 h-svh p-4">
+    <div className="flex h-svh flex-col gap-4 p-4">
       <PageHeader iconName="close" label="Kana Quiz" labelClassName="text-3xl" />
       <Select
         value={!mode}
@@ -90,7 +90,7 @@ export default function QuizKana() {
         activeIndex={activeTestModeNumber}
         handleChange={(newTestMode) => setTestMode(newTestMode)}
       />
-      <div className={cn("flex items-center justify-center my-8 text-5xl font-bold", jpFont)}>
+      <div className={cn("my-8 flex items-center justify-center text-5xl font-bold", jpFont)}>
         {kanaMapper[activeKey]?.jp}
       </div>
       {showResult && (
@@ -114,7 +114,7 @@ const Keyboard = ({keys, kanaMapper, onKeyPress}: KeyboardProps) => {
   const {isNepali} = usePreference();
 
   return (
-    <div className="flex flex-col w-full flex-1 overflow-auto">
+    <div className="flex w-full flex-1 flex-col overflow-auto">
       {keys?.map((row, i) => (
         <div key={"row-" + i} className="flex">
           {row.map((key, j) => (
@@ -124,10 +124,10 @@ const Keyboard = ({keys, kanaMapper, onKeyPress}: KeyboardProps) => {
               tabIndex={0}
               onKeyDown={(e) => e}
               className={cn(
-                "flex flex-1 m-1 rounded-lg justify-center text-lg select-none hover:cursor-pointer p-1",
+                "m-1 flex flex-1 select-none justify-center rounded-lg p-1 text-lg hover:cursor-pointer",
                 key === ""
                   ? "bg-gray-300 dark:bg-gray-800"
-                  : "bg-blue-500 hover:bg-blue-600 text-white active:scale-90"
+                  : "bg-blue-500 text-white hover:bg-blue-600 active:scale-90",
               )}
               onClick={() => key && onKeyPress(key)}
             >
@@ -144,8 +144,8 @@ const ResultBox = ({isCorrect, answer}: {isCorrect: boolean; answer: string}) =>
   return (
     <div
       className={cn(
-        "absolute top-4 right-4 px-8 py-4 rounded-lg shadow-lg text-2xl transition-all z-[9999]",
-        isCorrect ? "bg-green-500 text-white" : "bg-red-500 text-white"
+        "absolute right-4 top-4 z-[9999] rounded-lg px-8 py-4 text-2xl shadow-lg transition-all",
+        isCorrect ? "bg-green-500 text-white" : "bg-red-500 text-white",
       )}
     >
       <div>{isCorrect ? "Correct!" : "Incorrect!"}</div>

@@ -10,17 +10,17 @@ export default function Index() {
   return (
     <div className="p-4">
       <PageHeader goBack={false} label="Nihongo" />
-      <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(150px,1fr))]">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
         <Card href="kana" label="Kana" />
         <Card href="quiz/kana" label="Kana Quiz" />
         <Card label="Numbers" />
         <Card label="Time" />
         <Card label="Particles" />
         <Card label="Greetings" />
-        <Card href="meaningLessons" label="Meanings" />
+        <Card href="Vocabulary" label="Meanings" />
         <Card href="bookLessons" label="Lesson" />
         <Card href="translate" label="Translate" />
-        <Card label="Quiz" href="quiz" />
+        <Card label="Quiz" href="quiz/vocab/match" />
       </div>
     </div>
   );

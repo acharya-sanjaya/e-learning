@@ -36,7 +36,7 @@ const words = [
   {meaning: "City", word: "まち", kanji: "町"},
   {meaning: "Food", word: "たべもの", kanji: "食べ物"},
   {meaning: "Place", word: "ところ", kanji: "所"},
-  {meaning: "Dormitory", word: "りょう", kanji: "寮"},
+  {meaning: "Hostel / Dormitory", word: "りょう", kanji: "寮"},
   {meaning: "Restaurant", word: "レストラン", kanji: ""},
   {meaning: "Life (daily life)", word: "せいかつ", kanji: "生活"},
   {meaning: "Job", word: "おしごと", kanji: "お仕事"},

@@ -75,8 +75,8 @@ export default function CustomQuiz() {
   };
 
   return (
-    <div className="flex max-h-screen select-none flex-col gap-4 p-4">
-      <PageHeader label={openDrawer ? "Select Words" : "Match the Pairs"} menuOn={false} />
+    <div className="flex max-h-svh select-none flex-col gap-4 p-4">
+      <PageHeader label="Quiz" menuOn={false} />
       <div className="fixed right-4 top-6 z-[1000] flex gap-4">
         <Button
           label="Kanji"
@@ -91,9 +91,9 @@ export default function CustomQuiz() {
       </div>
 
       {openDrawer && (
-        <div className="fixed inset-0 flex h-screen w-screen flex-col gap-8 p-4 backdrop-blur-md">
-          <div className="mt-20">
-            <div className="text-xl">Lessons:</div>
+        <div className="fixed inset-0 flex h-svh w-svw flex-col gap-8 p-4 backdrop-blur-md">
+          <div className="mt-16">
+            <div className="my-2 text-xl font-bold"> Select Lesson:</div>
             <div className="flex gap-4 overflow-auto">
               {availableLessons.map((l) => (
                 <Button
@@ -107,7 +107,7 @@ export default function CustomQuiz() {
           </div>
 
           <div className="flex gap-4">
-            <div className="text-xl">Words:</div>
+            <div className="text-xl font-bold">Words:</div>
             <div className="flex-1"></div>
             <Button
               disabled={selectedData.length === data.length}
@@ -122,25 +122,24 @@ export default function CustomQuiz() {
             />
           </div>
 
-          <div className="flex-1 overflow-auto">
+          <div className="flex-1 overflow-auto border-2 border-gray-500">
             {data.map((d, i) => (
               <button
                 key={d.word + i}
                 className={cn(
-                  "flex w-full flex-col items-start border-b-2 border-b-gray-500/50 py-1",
-                  selectedData.some((item) => item.word === d.word) && "bg-blue-950 text-white",
+                  "flex w-full flex-col items-start border-b-2 border-b-gray-500 px-1 py-1",
+                  selectedData.some((item) => item.word === d.word) && "bg-blue-500 text-white",
+                  i === data.length - 1 && "border-b-0",
                 )}
                 onClick={() => handleSelected(d)}
               >
                 <div className="font-sans-jp">{kanjiOn && d.kanji ? d.kanji : d.word}</div>
-                <div>{d.meaning}</div>
+                <div className="text-left">{d.meaning}</div>
               </button>
             ))}
           </div>
         </div>
       )}
-
-      <div className="mt-10"></div>
 
       <div className="flex-1 overflow-auto">
         {selectedData.length > 0 ? (
@@ -158,12 +157,14 @@ export default function CustomQuiz() {
             ))}
           </GridContainer>
         ) : (
-          <div className="text-center text-2xl">Select some words to play quiz</div>
+          <div className="flex h-96 w-full items-center justify-center text-center text-2xl">
+            Select some words to play quiz
+          </div>
         )}
 
         {selectedData.length > 0 && quizCards.length === 0 && (
-          <div className="flex justify-center">
-            <Button label="Play Again" onClick={() => generateQuizCards()} />
+          <div className="flex h-96 w-full items-center justify-center text-center">
+            <Button size="large" label="Play Again" onClick={() => generateQuizCards()} />
           </div>
         )}
       </div>

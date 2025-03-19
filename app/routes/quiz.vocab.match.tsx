@@ -1,44 +1,50 @@
-import {Fragment, useEffect, useMemo, useState} from "react";
-import Button from "~/components/ShiningButton";
+import {useCallback, useEffect, useState} from "react";
+import GridContainer from "~/components/GridContainer";
 import MatchCard from "~/components/MatchCard";
-import {getQuizCards, QuizDataType, LessonType, lessonOptions} from "~/data/vocabulary/getData";
 import PageHeader from "~/components/PageHeader";
+import Button from "~/components/ShiningButton";
+import {
+  getData,
+  LessonType,
+  QuizDataType,
+  availableLessons,
+  WordType,
+} from "~/data/vocabulary/getData";
+import Icon from "~/Icons";
+import {cn} from "~/lib/utils";
 
-export default function QuizMatchThePairs() {
+const shuffleArray = (array: QuizDataType[]) => [...array].sort(() => Math.random() - 0.5);
+
+export default function CustomQuiz() {
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [lesson, setLesson] = useState<LessonType>("L01");
+  const [selectedData, setSelectedData] = useState<WordType[]>([]);
+  const [quizCards, setQuizCards] = useState<QuizDataType[]>([]);
   const [kanjiOn, setKanjiOn] = useState(false);
-  const [activeLesson, setActiveLesson] = useState<LessonType>("L01");
   const [activeCards, setActiveCards] = useState({question: "", answer: ""});
   const [matchedCards, setMatchedCards] = useState<string[]>([]);
-  const [incorrectCards, setIncorrectCards] = useState<{
-    question: string;
-    answer: string;
-  }>({question: "", answer: ""});
+  const [incorrectCards, setIncorrectCards] = useState({question: "", answer: ""});
 
-  const [shuffledData, setShuffledData] = useState<{
-    questions: QuizDataType[];
-    answers: QuizDataType[];
-  }>({
-    questions: [],
-    answers: [],
-  });
+  const data = getData(lesson);
 
-  const initialData = useMemo(() => {
-    return getQuizCards(activeLesson);
-  }, [activeLesson]);
+  const generateQuizCards = useCallback(() => {
+    const newQuizCards: QuizDataType[] = selectedData.flatMap((entry) => [
+      {content: entry.word, kanji: entry.kanji, cardType: "question", id: "QN-" + entry.word},
+      {content: entry.meaning, cardType: "answer", id: "AN-" + entry.word},
+    ]);
+    setQuizCards(shuffleArray(newQuizCards));
+  }, [selectedData]);
 
-  const {questions, answers} = initialData;
+  useEffect(() => generateQuizCards(), [generateQuizCards]);
+  useEffect(() => setSelectedData([]), [lesson]);
 
-  useEffect(() => {
-    const shuffleArray = (array: QuizDataType[]) => {
-      return [...array].sort(() => Math.random() - 0.5);
-    };
-
-    const shuffled = {
-      questions: shuffleArray(questions),
-      answers: shuffleArray(answers),
-    };
-    setShuffledData(shuffled);
-  }, [questions, answers]);
+  const handleSelected = (d: WordType) => {
+    setSelectedData((prev) =>
+      prev.some((item) => item.word === d.word)
+        ? prev.filter((item) => item.word !== d.word)
+        : [...prev, d],
+    );
+  };
 
   const handleCardClick = (cardType: "question" | "answer", cardId: string) => {
     if (activeCards[cardType] === cardId) {
@@ -50,25 +56,16 @@ export default function QuizMatchThePairs() {
     setActiveCards(newActiveCards);
 
     if (newActiveCards.question && newActiveCards.answer) {
-      const questionCard = newActiveCards.question;
-      const answerCard = newActiveCards.answer;
-
-      if (questionCard === answerCard) {
-        setMatchedCards((prev) => [...prev, questionCard]);
+      if (newActiveCards.question === newActiveCards.answer) {
+        setMatchedCards((prev) => [...prev, newActiveCards.question]);
         setActiveCards({question: "", answer: ""});
+
         setTimeout(() => {
-          setShuffledData((prev) => ({
-            questions: prev.questions.filter((q) => q.id.slice(3) !== questionCard),
-            answers: prev.answers.filter((a) => a.id.slice(3) !== answerCard),
-          }));
-          setMatchedCards((prev) => prev.filter((id) => id !== questionCard)); // Cleanup matched cards
+          setQuizCards((prev) => prev.filter((q) => q.id.slice(3) !== newActiveCards.question));
+          setMatchedCards((prev) => prev.filter((id) => id !== newActiveCards.question));
         }, 500);
       } else {
-        setIncorrectCards({
-          question: questionCard,
-          answer: answerCard,
-        });
-
+        setIncorrectCards(newActiveCards);
         setTimeout(() => {
           setIncorrectCards({question: "", answer: ""});
           setActiveCards({question: "", answer: ""});
@@ -78,66 +75,97 @@ export default function QuizMatchThePairs() {
   };
 
   return (
-    <div className="p-4">
-      <PageHeader label="Match the Pairs" menuOn={false} />
-      <div className="fixed left-0 top-20 flex w-full flex-col gap-4 border-b-2 border-b-gray-300 p-4 text-lg backdrop-blur-md dark:border-b-slate-700">
-        <div className="flex items-center gap-4">
-          <div>Mode:</div>
-          <Button
-            size="small"
-            label="Kanji"
-            onClick={() => setKanjiOn((prev) => !prev)}
-            variant={kanjiOn ? "standard" : "danger"}
-          />
-        </div>
-        <div className="flex items-center gap-4">
-          <div>Lesson:</div>
-          <select
-            className="p-2 outline-none"
-            value={activeLesson}
-            onChange={(e) => setActiveLesson(e.target.value as LessonType)}
-          >
-            {lessonOptions.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
-        </div>
+    <div className="flex max-h-screen select-none flex-col gap-4 p-4">
+      <PageHeader label={openDrawer ? "Select Words" : "Match the Pairs"} menuOn={false} />
+      <div className="fixed right-4 top-6 z-[1000] flex gap-4">
+        <Button
+          label="Kanji"
+          onClick={() => setKanjiOn((prev) => !prev)}
+          variant={kanjiOn ? "standard" : "danger"}
+        />
+        {openDrawer ? (
+          <Icon onClick={() => setOpenDrawer(false)} className="size-8" iconName="close" />
+        ) : (
+          <Icon onClick={() => setOpenDrawer(true)} className="size-8" iconName="hamburger" />
+        )}
       </div>
-      <div className="mt-28 grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4">
-        {shuffledData.questions.map((_, i) => {
-          const questionCard = shuffledData.questions[i];
-          const answerCard = shuffledData.answers[i];
-          return (
-            <Fragment key={activeLesson + i + questionCard?.id}>
+
+      {openDrawer && (
+        <div className="fixed inset-0 flex h-screen w-screen flex-col gap-8 p-4 backdrop-blur-md">
+          <div className="mt-20">
+            <div className="text-xl">Lessons:</div>
+            <div className="flex gap-4 overflow-auto">
+              {availableLessons.map((l) => (
+                <Button
+                  key={l}
+                  onClick={() => setLesson(l)}
+                  label={l.slice(1)}
+                  isActive={lesson === l}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <div className="text-xl">Words:</div>
+            <div className="flex-1"></div>
+            <Button
+              disabled={selectedData.length === data.length}
+              label="Pick All"
+              onClick={() => setSelectedData(data)}
+            />
+            <Button
+              variant="danger"
+              disabled={selectedData.length === 0}
+              label="Remove All"
+              onClick={() => setSelectedData([])}
+            />
+          </div>
+
+          <div className="flex-1 overflow-auto">
+            {data.map((d, i) => (
+              <button
+                key={d.word + i}
+                className={cn(
+                  "flex w-full flex-col items-start border-b-2 border-b-gray-500/50 py-1",
+                  selectedData.some((item) => item.word === d.word) && "bg-blue-950 text-white",
+                )}
+                onClick={() => handleSelected(d)}
+              >
+                <div className="font-sans-jp">{kanjiOn && d.kanji ? d.kanji : d.word}</div>
+                <div>{d.meaning}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div className="mt-10"></div>
+
+      <div className="flex-1 overflow-auto">
+        {selectedData.length > 0 ? (
+          <GridContainer>
+            {quizCards.map((card, i) => (
               <MatchCard
-                cardId={questionCard?.id.slice(3)}
-                content={
-                  kanjiOn && questionCard?.kanji ? questionCard?.kanji : questionCard?.content
-                }
-                cardType={questionCard?.cardType}
-                activeCards={activeCards}
-                matched={matchedCards.includes(questionCard?.id.slice(3))}
-                incorrectCards={incorrectCards}
-                handleCardClick={() =>
-                  handleCardClick(questionCard?.cardType, questionCard?.id.slice(3))
-                }
+                key={card.id + i}
+                cardId={card.id.slice(3)}
+                content={kanjiOn && card.kanji ? card.kanji : card.content}
+                cardType={card.cardType}
+                matched={matchedCards.includes(card.id.slice(3))}
+                handleCardClick={() => handleCardClick(card.cardType, card.id.slice(3))}
+                {...{activeCards, incorrectCards}}
               />
-              <MatchCard
-                cardId={answerCard?.id.slice(3)}
-                content={answerCard?.content}
-                cardType={answerCard?.cardType}
-                activeCards={activeCards}
-                matched={matchedCards.includes(answerCard?.id.slice(3))}
-                incorrectCards={incorrectCards}
-                handleCardClick={() =>
-                  handleCardClick(answerCard?.cardType, answerCard?.id.slice(3))
-                }
-              />
-            </Fragment>
-          );
-        })}
+            ))}
+          </GridContainer>
+        ) : (
+          <div className="text-center text-2xl">Select some words to play quiz</div>
+        )}
+
+        {selectedData.length > 0 && quizCards.length === 0 && (
+          <div className="flex justify-center">
+            <Button label="Play Again" onClick={() => generateQuizCards()} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -20,8 +20,7 @@ const MatchCard = ({
   handleCardClick,
 }: MatchCardProps) => {
   const isSelected = activeCards[cardType] === cardId;
-  const disabled =
-    activeCards[cardType] !== "" && activeCards[cardType] !== cardId;
+  const disabled = activeCards[cardType] !== "" && activeCards[cardType] !== cardId;
   const isIncorrect = incorrectCards[cardType] === cardId;
 
   return (
@@ -31,7 +30,7 @@ const MatchCard = ({
         handleCardClick(cardType, cardId);
       }}
       className={cn(
-        "flex min-h-40 w-40 select-none items-center justify-center rounded-md border-2 p-4 text-lg",
+        "flex items-center justify-center rounded-md border-2 p-4 text-lg",
         isSelected && "border-blue-500 text-blue-500",
         !matched && disabled && "border-gray-500/60 text-gray-500/60",
         !matched && !disabled && !isIncorrect && "active:scale-95",

@@ -91,10 +91,10 @@ export default function CustomQuiz() {
       </div>
 
       {openDrawer && (
-        <div className="fixed inset-0 flex h-svh w-svw flex-col gap-8 p-4 backdrop-blur-md">
+        <div className="fixed inset-0 flex h-svh w-svw flex-col gap-8 p-4 backdrop-blur-sm">
           <div className="mt-16">
             <div className="my-2 text-xl font-bold"> Select Lesson:</div>
-            <div className="flex gap-4 overflow-auto">
+            <div className="flex justify-between gap-4 overflow-auto">
               {availableLessons.map((l) => (
                 <Button
                   key={l}

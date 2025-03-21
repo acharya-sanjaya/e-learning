@@ -22,7 +22,7 @@ const MatchCard = ({
   const isSelected = activeCards[cardType] === cardId;
   const disabled =
     (activeCards[cardType] !== "" && activeCards[cardType] !== cardId) ||
-    (cardType === "answer" && activeCards.question === "");
+    (cardType === "question" && activeCards.answer === "");
   const isIncorrect = incorrectCards[cardType] === cardId;
 
   return (

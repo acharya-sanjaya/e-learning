@@ -6,20 +6,20 @@ import usePreference from "~/hooks/usePreference";
 import {cn} from "~/lib/utils";
 
 export default function Kanji() {
-  const {jpFont, isNepali} = usePreference();
+  const {isNepali} = usePreference();
 
   return (
     <div className="p-4">
       <PageHeader label="Kanji" />
 
-      <GridContainer>
+      <GridContainer width="large">
         {data.map((item, index) => (
           <FlipCard
             key={index}
-            front={<div className={cn("text-center text-6xl", jpFont)}>{item.kanji}</div>}
+            front={<div className={cn("text-center font-sans-jp text-7xl")}>{item.kanji}</div>}
             back={
-              <div className="flex flex-col items-center justify-center gap-1 text-center text-lg">
-                <div className={jpFont}>{item.jp}</div>
+              <div className="flex flex-col items-center justify-center gap-1 text-center text-xl">
+                <div className="font-sans-jp">{item.jp}</div>
                 {isNepali ? <div>{item.np}</div> : <div>{item.en}</div>}
               </div>
             }

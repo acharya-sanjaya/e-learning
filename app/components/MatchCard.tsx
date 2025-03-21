@@ -20,7 +20,9 @@ const MatchCard = ({
   handleCardClick,
 }: MatchCardProps) => {
   const isSelected = activeCards[cardType] === cardId;
-  const disabled = activeCards[cardType] !== "" && activeCards[cardType] !== cardId;
+  const disabled =
+    (activeCards[cardType] !== "" && activeCards[cardType] !== cardId) ||
+    (cardType === "answer" && activeCards.question === "");
   const isIncorrect = incorrectCards[cardType] === cardId;
 
   return (

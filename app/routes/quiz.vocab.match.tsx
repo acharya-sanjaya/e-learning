@@ -115,7 +115,7 @@ const QuizTestConsumer = () => {
           );
         })}
       </div>
-      <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4">
+      <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 pb-4">
         {activeQuestionId !== "" &&
           answerCards.map((card) => (
             <MatchCard
@@ -162,10 +162,9 @@ const QuizTestConsumer = () => {
       </div>
       {questionCards.length <= 0 && (
         <>
-          <div className="flex w-full flex-1 items-center justify-center p-4 text-center text-2xl font-bold">
+          <div className="mb-10 flex w-full flex-1 items-center justify-center p-4 text-center text-2xl font-bold">
             Select Questions to start playing the quiz
           </div>
-          <div className="h-80"></div>
         </>
       )}
     </div>

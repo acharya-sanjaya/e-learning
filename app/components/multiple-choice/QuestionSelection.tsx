@@ -46,7 +46,7 @@ export default function QuestionsSelection() {
                 key={`set: ${selectedSet} question:${q} index: ${i}`}
                 className={cn(
                   "w-full cursor-pointer border-b border-gray-500/50 text-xl",
-                  selectedQuestions.includes(q) && "bg-blue-500/20",
+                  selectedQuestions.includes(q) && "bg-blue-500/30",
                 )}
                 onClick={() => toggleSelect(q)}
               >

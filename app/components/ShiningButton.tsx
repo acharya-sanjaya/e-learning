@@ -46,8 +46,7 @@ export default function Button({
         variant === "success" && "border-green-400 bg-green-500",
         variant === "golden" && "border-yellow-400 bg-yellow-500",
 
-        isActive &&
-          "border-none bg-black text-white dark:bg-white dark:text-black",
+        isActive && "border-none bg-black text-white dark:bg-white dark:text-black",
 
         !removePressingEffect && "active:scale-95",
 
@@ -56,8 +55,7 @@ export default function Button({
         className,
 
         disabled && "cursor-not-allowed opacity-70",
-        !removeShiningEffect &&
-          "group relative flex items-center justify-center overflow-hidden",
+        !removeShiningEffect && "group relative flex items-center justify-center overflow-hidden",
       )}
     >
       {label}

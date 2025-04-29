@@ -53,7 +53,7 @@ const iconMapper = {
 
 export type IconNameType = keyof typeof iconMapper;
 
-interface IconProps {
+interface IconProps extends React.SVGProps<SVGSVGElement> {
   className?: string;
   thickness?: number;
   iconName: keyof typeof iconMapper;
@@ -72,18 +72,35 @@ const Icon = ({thickness = 2, ...props}: IconProps) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     className={cn(
-      "cursor-pointer stroke-gray-800 dark:stroke-gray-200",
+      "size-full cursor-pointer stroke-gray-800 dark:stroke-gray-200",
       props.className,
       props.onClick && "active:scale-90",
     )}
     onClick={props.onClick}
   >
     {iconMapper[props.iconName] ?? (
-      <div className={cn(props.className, "flex size-full items-center justify-center")}>
-        Icon not found
-      </div>
+      <div className={cn(props.className, "flex items-center justify-center")}>Icon not found</div>
     )}
   </svg>
 );
+
+interface WrappedIconProps extends IconProps {
+  iconClassName?: string;
+}
+
+export const WrappedIcon = ({thickness = 4, ...props}: WrappedIconProps) => {
+  return (
+    <button
+      className={cn("size-8 rounded-full bg-black p-1 dark:bg-white", props.className)}
+      onClick={props.onClick}
+    >
+      <Icon
+        thickness={thickness}
+        iconName={props.iconName}
+        className={cn("size-full stroke-white dark:stroke-black", props.iconClassName)}
+      />
+    </button>
+  );
+};
 
 export default Icon;

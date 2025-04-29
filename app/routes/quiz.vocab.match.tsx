@@ -77,7 +77,7 @@ const QuizTestConsumer = () => {
 
       <PageHeader label="Quiz" menuOn={false} />
       {drawer && (
-        <div className="fixed inset-0 z-10 z-[9999] flex h-full w-full flex-col p-4 backdrop-blur-md">
+        <div className="fixed inset-0 z-[9999] flex h-full w-full flex-col p-4 backdrop-blur-md">
           <div className="mb-4 size-10 self-end">
             <Icon iconName="close" onClick={() => setDrawer(false)} />
           </div>

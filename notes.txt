@@ -1,0 +1,168 @@
+<!--
+# Basic Structure of html
+<html>
+    <head>
+        <title>My First HTML Page</title>
+    </head>
+    <body>
+        CONTENTS OF WEBSITE
+    </body>
+</html>
+-->
+
+<hr>
+
+<p>Normal Line 1</p>
+<p>Normal Line 2</p>
+<p>Normal Line 3</p>
+<p>Normal Line 4</p>
+<p>Normal Line 5</p>
+
+<hr>
+
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+
+<hr>
+
+<ul type="disc">
+    <li>Apple</li>
+    <li>Mango</li>
+    <li>Orange</li>
+</ul>
+
+<ul type="circle">
+    <li>Car</li>
+    <li>Bus</li>
+    <li>Bike</li>
+</ul>
+
+<ul type="square">
+    <li>Cat</li>
+    <li>Dog</li>
+    <li>Tiger</li>
+</ul>
+
+<hr>
+
+<ol type="1">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ol>
+
+<ol type="A">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ol>
+
+<ol type="a">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ol>
+
+<ol type="i">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ol>
+
+<ol style="list-style-type: '🌸 ' ">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ol>
+
+
+<hr>
+  
+<!--
+# Inline and Block
+- Inline element doesn't break the line by default.
+Examples: <b>, <u>, <i>, <sub>, <sup>, <a>, <img>, etc.
+Code:
+-->
+
+<br>
+<br>
+
+
+<hr>
+<h1>Inline elements DON'T make the line breaks</h1>
+
+<b>Bold Text</b>
+<u>Underlined Text</u>
+<i>Italic Text</i>
+<hr>
+
+<br>
+<br>
+
+
+<!--
+- Block element breaks the line by default.
+Examples: <p>, <h1>, <ul>, <ol>, <li>, <div>, etc.
+Code:
+-->
+
+<hr>
+<h1>Block elements DO make the line breaks (both before and after element)</h1>
+
+<p>Paragraph</p>
+<h1>Heading 1</h1>
+<div>Division</div>
+<hr>
+
+<table border cellpadding=10>
+  <caption>This is the table title</caption>
+    <tr>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <th>Column 3</th>
+    </tr>
+
+    <tr>
+        <td>Data 1</td>
+        <td>Data 2</td>
+        <td>Data 3</td>
+    </tr>
+
+    <tr>
+        <td>Data 4</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+    </tr>
+
+    <tr>
+        <td>Data 7</td>
+        <td>Data 8</td>
+        <td>Data 9</td>
+    </tr>
+</table>
+
+<hr>
+
+<a href="#">Click Here</a><br>
+<a href="#">Click Here</a>
+<a href="#">Click Here</a>
+<a href="#">Click Here</a>
+<a href="#">Click Here</a>
+
+<br>
+<br>
+
+<button>My Button</button>
+<br>
+
+<hr>
+
+
+
+
+

@@ -35,7 +35,7 @@ export default function Button({
     <button
       onClick={onClick}
       className={cn(
-        "flex min-w-fit flex-col text-white",
+        "flex min-w-fit select-none flex-col items-center text-white",
         size === "x-small" && "rounded-sm border px-2 py-0.5 text-sm",
         size === "small" && "rounded-md border-2 px-2 py-1 text-base",
         size === "medium" && "rounded-md border-2 px-3 py-1 text-lg",

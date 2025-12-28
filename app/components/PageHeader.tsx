@@ -131,7 +131,7 @@ const FontDropdown = ({
   return (
     <div className="relative my-2 w-full">
       <div
-        className="flex items-center justify-between py-2"
+        className="mb-2 flex items-center justify-between rounded-md bg-white/10 px-4 py-2"
         role="button"
         tabIndex={0}
         onKeyDown={(e) => e.key in ["Enter", " "] && setDropFonts((x) => !x)}
@@ -140,11 +140,13 @@ const FontDropdown = ({
         }}
       >
         <div className="select-none text-3xl">Fonts</div>
-        <Icon
-          iconName="chevronDown"
-          thickness={2}
-          className={cn("transition-transform duration-300", dropFonts ? "-rotate-180" : "")}
-        />
+        <div>
+          <Icon
+            iconName="chevronDown"
+            thickness={2}
+            className={cn("transition-transform duration-300", dropFonts ? "-rotate-180" : "")}
+          />
+        </div>
       </div>
       <div className="absolute h-fit w-full overflow-hidden">
         <div

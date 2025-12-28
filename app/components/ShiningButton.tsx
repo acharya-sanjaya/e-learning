@@ -1,7 +1,8 @@
+import {ReactNode} from "react";
 import {cn} from "~/lib/utils";
 
 interface ButtonProps {
-  label: string;
+  label: string | ReactNode;
   size?: "x-small" | "small" | "medium" | "large";
   onClick?: () => void;
   variant?: "standard" | "danger" | "success" | "golden";

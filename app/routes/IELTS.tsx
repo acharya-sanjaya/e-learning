@@ -195,10 +195,20 @@ const IeltsPractice = () => {
       <div className="h-20" />
 
       {/* Content: 40 input fields */}
-      <div className="flex flex-col gap-4 p-4">
+      <div className="m-4 flex flex-col gap-4 rounded-xl border-4 border-black py-4 dark:border-white">
         {answers.map((a, idx) => (
-          <div key={idx} className="flex flex-col gap-2">
-            <div className="flex items-center gap-2 text-2xl">
+          <div key={idx} className="flex flex-col gap-4">
+            {idx % 10 === 0 && (
+              <>
+                {Math.floor(idx / 10) + 1 != 1 && (
+                  <HLine className="mt-10 rounded-none bg-black dark:bg-white" />
+                )}
+                <div className="text-center text-3xl font-bold">
+                  Section: {Math.floor(idx / 10) + 1}
+                </div>
+              </>
+            )}
+            <div className="flex items-center gap-2 px-4 text-2xl">
               <div className="w-10 text-right text-blue-500">{idx + 1}.</div>
               <input
                 type="text"
@@ -236,8 +246,10 @@ const IeltsPractice = () => {
   );
 };
 
-const HLine = () => (
-  <div className="mb-4 mt-2 h-1 w-full rounded-full bg-gray-500 dark:bg-gray-300"></div>
+const HLine = ({className}: {className?: string}) => (
+  <div
+    className={cn("mb-4 mt-2 h-1 w-full rounded-full bg-gray-500 dark:bg-gray-300", className)}
+  ></div>
 );
 
 export default IeltsPractice;

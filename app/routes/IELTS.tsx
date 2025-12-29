@@ -216,7 +216,7 @@ const IeltsPractice = () => {
                 onChange={(e) => handleAnswerChange(e, idx)}
                 disabled={isChecking}
                 className={cn(
-                  "w-full rounded-xl border-2 border-blue-500/50 bg-transparent px-2 py-1 outline-none",
+                  "w-full rounded-xl border-2 border-blue-500/50 bg-transparent px-2 py-1 text-sm leading-7 outline-none",
                   a.status === "correct" && "border-green-500/50 bg-green-500/30",
                   a.status === "incorrect" && "border-red-500/50 bg-red-500/30",
                 )}

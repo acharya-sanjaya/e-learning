@@ -15,7 +15,10 @@ const IeltsPractice = () => {
     setAnswers((prev) => prev.map((a) => ({...a, status})));
   };
 
-  const handleClear = () => setAnswers(defaultAnswers);
+  const handleClear = () => {
+    setAnswers(defaultAnswers);
+    setIsChecking(false);
+  };
 
   const handleAnswerChange = (e: React.ChangeEvent<HTMLInputElement>, idx: number) => {
     const newAnswers = [...answers];

@@ -223,7 +223,7 @@ const IeltsPractice = () => {
               />
             </div>
             {isChecking && (
-              <div className="mt-1 flex justify-end gap-4">
+              <div className="mt-1 flex justify-end gap-4 px-4">
                 <Button
                   label={<Icon iconName="checked" thickness={4} className="stroke-white" />}
                   onClick={() => {

@@ -17,3 +17,7 @@ body {
   box-sizing: border-box;
   font-family: monospace;
 }
+
+b {
+  @apply font-bold text-blue-500;
+}

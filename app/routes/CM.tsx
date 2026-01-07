@@ -1,164 +1,59 @@
-import {useState} from "react";
-import Button from "~/components/ShiningButton";
+import {useEffect, useState} from "react";
+import Clock from "./CM/Clock";
+import Drawer from "~/components/Drawer";
+import Header from "~/components/Header";
+import TargetBlock from "./CM/TargetBlock";
+import Stats from "./CM/Stats";
+import Collect from "./CM/Collect";
+import RateBlock from "./CM/RateBlock";
 
 const CM = () => {
-  const ratePerHour = 1.5;
-  const ratePerMinute = ratePerHour / 60;
+  const [menuOn, setMenuOn] = useState(false);
+  const [target1, setTarget1] = useState("");
+  const [target2, setTarget2] = useState("");
+  const [RPH, setRPH] = useState("");
 
-  const [balance, setBalance] = useState("");
-  const [showResults, setShowResults] = useState(false);
-  const [invalid, setInvalid] = useState(false);
-  const [target, setTarget] = useState(106.25); // default target
+  const loadDataFromLocalStorage = () => {
+    const target1 = localStorage.getItem("target1") ?? "";
+    const target2 = localStorage.getItem("target2") ?? "";
+    const RPH = localStorage.getItem("rate") ?? "";
 
-  const balanceNum = Number(balance);
-
-  // Handle balance input
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setBalance(value);
-    setShowResults(false);
-
-    if (value === "" || isNaN(Number(value)) || Number(value) < 0) {
-      setInvalid(true);
-    } else {
-      setInvalid(false);
-    }
+    setTarget1(target1);
+    setTarget2(target2);
+    setRPH(RPH);
   };
 
-  // Show results
-  const calculate = () => {
-    if (!invalid) setShowResults(true);
+  useEffect(() => {
+    loadDataFromLocalStorage();
+  }, []);
+
+  const saveRate = (r: string) => {
+    localStorage.setItem("rate", r.toString());
+    setRPH(r);
   };
 
-  const reset = () => {
-    setBalance("");
-    setShowResults(false);
-    setInvalid(false);
-    setTarget(106.25); // reset to default
+  const saveTarget1 = (t1: string) => {
+    localStorage.setItem("target1", t1.toString());
+    setTarget1(t1);
   };
 
-  // Compute results
-  let resultTitle = "";
-  let timeText = "";
-  let dateText = "";
-
-  if (showResults && invalid) resultTitle = "Invalid Input";
-  else if (showResults && !invalid && balanceNum >= target) resultTitle = "Target Achieved";
-  else if (showResults && !invalid && balanceNum < target) {
-    const remaining = target - balanceNum;
-    const totalMinutes = Math.ceil(remaining / ratePerMinute);
-
-    const days = Math.floor(totalMinutes / (24 * 60));
-    const hours = Math.floor((totalMinutes % (24 * 60)) / 60);
-    const minutes = totalMinutes % 60;
-
-    timeText = `${days} D : ${hours} H : ${minutes} M`;
-
-    const targetDate = new Date();
-    targetDate.setMinutes(targetDate.getMinutes() + totalMinutes);
-
-    dateText = targetDate.toLocaleString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
-  }
+  const saveTarget2 = (t2: string) => {
+    localStorage.setItem("target2", t2.toString());
+    setTarget2(t2);
+  };
 
   return (
-    <div className="flex flex-col gap-4 p-4 text-xl">
-      {/* Balance Input */}
-      <div className="flex flex-col items-center">
-        <div>Balance (in Millions):</div>
-        <input
-          type="number"
-          inputMode="decimal"
-          value={balance}
-          onChange={handleChange}
-          className={`w-full rounded border p-2 outline-none ${invalid ? "border-red-500" : "border-gray-600"}`}
-        />
-      </div>
-
-      {/* Calculate / Reset */}
-      <div className="flex gap-4">
-        <Button label="Calculate" onClick={calculate} />
-        {balance !== "" && <Button label="Reset" onClick={reset} variant="danger" />}
-      </div>
-
-      {/* Results */}
-      {showResults && (
-        <div className="rounded-xl border bg-black/20 p-4 dark:bg-white/20">
-          <div className="mb-4 text-center font-bold">
-            {/* Target selection inside results */}
-            {!invalid && (
-              <div className="mb-4 flex w-full gap-4">
-                <div>Target:</div>
-                <Button
-                  label="106.25 M"
-                  onClick={() => setTarget(106.25)}
-                  isActive={target === 106.25} // shiny when active
-                />
-                <Button
-                  label="350 M"
-                  onClick={() => setTarget(350)}
-                  isActive={target === 350} // shiny when active
-                />
-              </div>
-            )}
-
-            <M text={invalid ? "Invalid Input" : resultTitle} />
-          </div>
-
-          {/* Stats */}
-          <div className="mb-4 flex flex-col gap-2">
-            <div>
-              <span>Balance: </span>
-              <M text={String(balanceNum)} />
-            </div>
-            {resultTitle !== "Target Achieved" && !invalid && (
-              <div>
-                <span>Required: </span>
-                <M text={String((Number((target - balanceNum).toFixed(2)) * 100) / 100)} />
-              </div>
-            )}
-          </div>
-
-          {resultTitle !== "Target Achieved" && !invalid && (
-            <>
-              <div>Estimated Time:</div>
-              <div>{timeText}</div>
-              <br />
-              <div>Ready In:</div>
-              <div>{dateText}</div>
-            </>
-          )}
-        </div>
-      )}
+    <div>
+      <Header label="CM Manager" menuOn={menuOn} onMenuClick={() => setMenuOn((m) => !m)} />
+      <Collect />
+      <Drawer open={menuOn} onClose={() => setMenuOn(false)}>
+        <Clock />
+        <TargetBlock label="Target 1" target={target1} onSave={saveTarget1} />
+        <TargetBlock label="Target 2" target={target2} onSave={saveTarget2} />
+        <RateBlock rate={RPH} onSave={saveRate} />
+      </Drawer>
+      <Stats targets={[Number(target1), Number(target2)]} ratePerHour={Number(RPH)} />
     </div>
-  );
-};
-
-// Shining M component
-const M = ({text}: {text?: string}) => {
-  return (
-    <>
-      <span className="animate-shine bg-gradient-to-r from-yellow-400 via-yellow-200 to-yellow-400 bg-[length:200%_100%] bg-clip-text font-bold text-transparent">
-        {text}
-      </span>
-      {text && !isNaN(Number(text)) && <span> M</span>}
-      <style>{`
-        @keyframes shine {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
-        .animate-shine {
-          animation: shine 2s linear infinite;
-        }
-      `}</style>
-    </>
   );
 };
 

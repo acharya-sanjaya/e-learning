@@ -17,6 +17,18 @@ export default {
         ],
         "sans-jp": ["Noto Sans JP", "sans-serif"],
       },
+      keyframes: {
+        "slide-bg": {
+          "0%": {"background-position": "-200% 0"},
+          "100%": {"background-position": "200% 0"},
+        },
+      },
+      animation: {
+        "slide-bg": "slide-bg 2s linear infinite",
+      },
+      backgroundSize: {
+        "200p": "200% 100%",
+      },
     },
   },
   plugins: [],

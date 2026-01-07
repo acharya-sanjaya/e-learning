@@ -84,12 +84,15 @@ const Collect = ({ratePerHour = 1.5}: CollectProps) => {
   };
 
   return (
-    <div className="m-auto mt-2 flex max-w-sm flex-col items-center gap-2 text-xl">
+    <div className="m-auto my-2 flex max-w-sm flex-col items-center gap-2 text-xl">
       <ShiningEffect
         text={formattedCountdown}
-        className={cn(isCritical ? "text-red-500" : "text-blue-400")}
+        className={cn(
+          isCritical
+            ? "from-red-400 via-red-500 to-red-600"
+            : "from-blue-400 via-blue-500 to-blue-600",
+        )}
       />
-
       <div>
         <Button
           label="Collect"
@@ -97,10 +100,6 @@ const Collect = ({ratePerHour = 1.5}: CollectProps) => {
           disabled={isLessThan1Min}
           variant="golden"
         />
-      </div>
-
-      <div className="mt-2">
-        Balance: <span className="font-bold">{balance} M</span>
       </div>
     </div>
   );

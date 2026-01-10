@@ -1,106 +1,129 @@
-import {useEffect, useState, useRef} from "react";
+import {useEffect, useState} from "react";
 import Button from "~/components/ShiningButton";
 import ShiningEffect from "./ShiningEffect";
 import {cn} from "~/lib/utils";
 
-const STORAGE_LAST_COLLECTED = "collect_last_collected";
+const getDisplayValue = (value: number) => {
+  const displayValue = new Intl.NumberFormat("en", {
+    notation: "compact",
+    maximumFractionDigits: 2,
+  }).format(value);
+
+  return displayValue;
+};
+
+const STORAGE_LAST_COLLECTED_MIN = "collect_last_min";
 const STORAGE_BALANCE = "stats_balance";
+const STORAGE_POCKET = "collect_pocket";
 
 interface CollectProps {
-  ratePerHour?: number; // default rate if not provided
+  ratePerMinute?: number;
 }
 
-const Collect = ({ratePerHour = 1.5}: CollectProps) => {
-  const [collectedAt, setCollectedAt] = useState<Date>(new Date(0)); // SSR-safe dummy
-  const [timeLeftMs, setTimeLeftMs] = useState(6 * 60 * 60 * 1000); // 6 hr countdown
-  const [balance, setBalance] = useState("0"); // balance string
-  const intervalRef = useRef<number>();
+const MAX_MINUTES = 360; // 6 hours
 
-  // ===== Load from localStorage or initialize =====
+const getCurrentMinute = () => Math.floor(Date.now() / 60000);
+const getCurrentSecond = () => new Date().getSeconds();
+
+const Collect = ({ratePerMinute = 25000}: CollectProps) => {
+  const [pocket, setPocket] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(60 - getCurrentSecond());
+
+  /* ===== Initial load (offline collection) ===== */
   useEffect(() => {
-    const savedTime = localStorage.getItem(STORAGE_LAST_COLLECTED);
-    if (savedTime) {
-      setCollectedAt(new Date(savedTime));
-    } else {
-      const now = new Date();
-      setCollectedAt(now);
-      localStorage.setItem(STORAGE_LAST_COLLECTED, now.toISOString());
-    }
+    const nowMin = getCurrentMinute();
 
-    const savedBalance = localStorage.getItem(STORAGE_BALANCE);
-    if (savedBalance !== null) {
-      setBalance(savedBalance);
-    } else {
-      localStorage.setItem(STORAGE_BALANCE, "0");
-    }
+    const savedLastMin = Number(localStorage.getItem(STORAGE_LAST_COLLECTED_MIN));
+    const lastMin = isNaN(savedLastMin) ? nowMin : savedLastMin;
+
+    const passedMinutes = Math.min(nowMin - lastMin, MAX_MINUTES);
+    const offlineCoins = Math.max(passedMinutes, 0) * ratePerMinute;
+
+    const savedPocket = Number(localStorage.getItem(STORAGE_POCKET)) || 0;
+    const newPocket = savedPocket + offlineCoins;
+
+    setPocket(newPocket);
+    localStorage.setItem(STORAGE_POCKET, String(newPocket));
+    localStorage.setItem(STORAGE_LAST_COLLECTED_MIN, String(nowMin));
+  }, [ratePerMinute]);
+
+  /* ===== Second sync (UI only) ===== */
+  useEffect(() => {
+    const t = setInterval(() => {
+      setSecondsLeft(60 - getCurrentSecond());
+    }, 1000);
+
+    return () => clearInterval(t);
   }, []);
 
-  // ===== Countdown timer =====
+  /* ===== Add coins every new minute ===== */
   useEffect(() => {
-    const update = () => {
-      const now = new Date().getTime();
-      const target = collectedAt.getTime() + 6 * 60 * 60 * 1000; // 6 hr from last collect
-      const diff = target - now;
-      setTimeLeftMs(diff > 0 ? diff : 0);
-    };
+    if (secondsLeft !== 60) return;
 
-    update(); // initial call
-    intervalRef.current = window.setInterval(update, 1000);
-    return () => clearInterval(intervalRef.current);
-  }, [collectedAt]);
+    setPocket((p) => {
+      const next = p + ratePerMinute;
+      localStorage.setItem(STORAGE_POCKET, String(next));
+      localStorage.setItem(STORAGE_LAST_COLLECTED_MIN, String(getCurrentMinute()));
+      return next;
+    });
+  }, [secondsLeft, ratePerMinute]);
 
-  // ===== Countdown display =====
-  const hours = Math.floor(timeLeftMs / (1000 * 60 * 60));
-  const minutes = Math.floor((timeLeftMs % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeLeftMs % (1000 * 60)) / 1000);
-  const formattedCountdown = `${hours}:${minutes.toString().padStart(2, "0")}:${seconds
-    .toString()
-    .padStart(2, "0")}`;
-
-  // ===== Conditions =====
-  const isCritical = timeLeftMs <= 3 * 60 * 60 * 1000; // less than 3 hours
-  const isLessThan1Min = new Date().getTime() - collectedAt.getTime() < 60 * 1000;
-
+  /* ===== Collect ===== */
   const handleCollect = () => {
-    const now = new Date();
+    const savedBalance = Number(localStorage.getItem(STORAGE_BALANCE)) || 0;
+    const newBalance = (savedBalance + pocket / 1000000).toFixed(2);
 
-    // Calculate elapsed time in hours
-    const elapsedMs = now.getTime() - collectedAt.getTime();
-    const elapsedHours = elapsedMs / (1000 * 60 * 60);
-
-    // Update balance
-    const currentBalance = parseFloat(balance) || 0;
-    const newBalance = (currentBalance + elapsedHours * ratePerHour).toFixed(2);
-
-    setBalance(newBalance);
     localStorage.setItem(STORAGE_BALANCE, newBalance);
+    localStorage.setItem(STORAGE_POCKET, "0");
+    localStorage.setItem(STORAGE_LAST_COLLECTED_MIN, String(getCurrentMinute()));
 
-    // Update last collected time
-    setCollectedAt(now);
-    localStorage.setItem(STORAGE_LAST_COLLECTED, now.toISOString());
-
-    // Navigate to external link
-    window.location.href = "https://getcoinmaster.com/~pytqPBcD62?u=c";
+    setPocket(0);
   };
 
   return (
     <div className="m-auto my-2 flex max-w-sm flex-col items-center gap-2 text-xl">
-      <ShiningEffect
-        text={formattedCountdown}
-        className={cn(
-          isCritical
-            ? "from-red-400 via-red-500 to-red-600"
-            : "from-blue-400 via-blue-500 to-blue-600",
-        )}
-      />
-      <div>
-        <Button
-          label="Collect"
-          onClick={handleCollect}
-          disabled={isLessThan1Min}
-          variant="golden"
+      <Pocket max={ratePerMinute * MAX_MINUTES} value={pocket} />
+
+      {/* <Pocket max={ratePerMinute * MAX_MINUTES} value={9000000} /> */}
+      <Button label="Collect" onClick={handleCollect} disabled={pocket === 0} variant="golden" />
+      <ShiningEffect text={`${getDisplayValue(ratePerMinute)} in ${secondsLeft}s`} />
+    </div>
+  );
+};
+
+interface PocketProps {
+  max: number;
+  value: number;
+}
+
+const Pocket = ({max, value}: PocketProps) => {
+  const isCritical = value >= max * 0.3;
+  const displayValue = getDisplayValue(value);
+
+  return (
+    <div className="flex w-full items-center gap-1 px-4">
+      <div className="relative flex h-20 w-full overflow-hidden rounded-xl shadow-[inset_0_0_2px_0]">
+        <div
+          className={cn(
+            "bg-gradient-to-r transition-all",
+            isCritical
+              ? "from-red-500 via-red-600 to-red-700"
+              : "from-yellow-500 via-yellow-300 to-yellow-200",
+          )}
+          style={{width: `${(value * 100) / max}%`}}
+        ></div>
+        <div className="flex-1 transition-all"></div>
+        <ShiningEffect
+          text={`${displayValue}`}
+          className="absolute flex size-full items-center justify-center text-3xl"
         />
       </div>
+      <div
+        className={cn(
+          "h-12 w-1.5 rounded-full shadow-[inset_0_0_2px_0]",
+          value >= max && "bg-red-700",
+        )}
+      ></div>
     </div>
   );
 };

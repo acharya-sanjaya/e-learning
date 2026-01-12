@@ -3,33 +3,35 @@ import Button from "~/components/ShiningButton";
 import Icon from "~/Icons";
 import {cn} from "~/lib/utils";
 
-interface RateBlockProps {
-  rate: string;
-  onSave: (r: string) => void;
+interface InputBoxProps {
+  label: string;
+  value: string;
+  onSave: (v: string) => void;
+  separate?: boolean;
 }
 
-const RateBlock = ({rate, onSave}: RateBlockProps) => {
-  const [newRate, setNewRate] = useState(rate);
+const InputBox = ({label, value, onSave, separate = false}: InputBoxProps) => {
+  const [newValue, setNewValue] = useState(value);
 
   // Sync with prop whenever it changes
   useEffect(() => {
-    setNewRate(rate);
-  }, [rate]);
+    setNewValue(value);
+  }, [value]);
 
-  const numberForm = Number(newRate);
-  const isInvalid = rate === newRate || isNaN(numberForm) || numberForm <= 0;
+  const numberForm = Number(newValue);
+  const isInvalid = value === newValue || isNaN(numberForm) || numberForm <= 0;
 
   return (
-    <div className="text-xl">
-      <div>Rate per hour</div>
+    <div className={cn("text-xl", separate && "mt-4")}>
+      <div>{label}</div>
       <div className="flex items-center gap-2">
         <input
           className={cn(
             "w-full rounded-md border-2 border-gray-300 bg-black/5 p-2 outline-none focus:border-blue-500 dark:border-slate-700 dark:bg-white/10",
           )}
           type="text"
-          value={newRate}
-          onChange={(e) => setNewRate(e.target.value)}
+          value={newValue}
+          onChange={(e) => setNewValue(e.target.value)}
           inputMode="decimal"
         />
         <Button
@@ -41,11 +43,11 @@ const RateBlock = ({rate, onSave}: RateBlockProps) => {
               iconName="save"
             />
           }
-          onClick={() => onSave(newRate)}
+          onClick={() => onSave(newValue)}
         />
       </div>
     </div>
   );
 };
 
-export default RateBlock;
+export default InputBox;

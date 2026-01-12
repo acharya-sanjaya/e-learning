@@ -2,103 +2,109 @@ import {useEffect, useState} from "react";
 import Button from "~/components/ShiningButton";
 import ShiningEffect from "./ShiningEffect";
 import {cn} from "~/lib/utils";
+import {getFromLS, setIntoLS, getDisplayValue} from "../CM/lib";
 
-const getDisplayValue = (value: number) => {
-  const displayValue = new Intl.NumberFormat("en", {
-    notation: "compact",
-    maximumFractionDigits: 2,
-  }).format(value);
-
-  return displayValue;
-};
-
-const STORAGE_LAST_COLLECTED_MIN = "collect_last_min";
-const STORAGE_BALANCE = "stats_balance";
-const STORAGE_POCKET = "collect_pocket";
+const STORAGE_LAST_COLLECTED = "lastCollected";
 
 interface CollectProps {
-  ratePerMinute?: number;
+  rpm: number;
+  onCollect: (coins: number) => void;
 }
 
-const MAX_MINUTES = 360; // 6 hours
+const MAX_MINUTES = 360;
 
-const getCurrentMinute = () => Math.floor(Date.now() / 60000);
-const getCurrentSecond = () => new Date().getSeconds();
+const getSecondsLeft = () => (typeof window === "undefined" ? 60 : 60 - new Date().getSeconds());
 
-const Collect = ({ratePerMinute = 25000}: CollectProps) => {
+const calculateOfflineMinutes = () => {
+  const saved = new Date(getFromLS(STORAGE_LAST_COLLECTED));
+  const now = new Date();
+
+  const timeDiff = {
+    day: now.getDate() - saved.getDate(),
+    hrs: now.getHours() - saved.getHours(),
+    min: now.getMinutes() - saved.getMinutes(),
+  };
+
+  const offMins = timeDiff.day * 24 * 60 + timeDiff.hrs * 60 + timeDiff.min;
+
+  return offMins;
+};
+
+const Collect = ({rpm, onCollect}: CollectProps) => {
   const [pocket, setPocket] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(60 - getCurrentSecond());
+  const [secondsLeft, setSecondsLeft] = useState(60);
+  const [started, setStarted] = useState(false);
 
-  /* ===== Initial load (offline collection) ===== */
+  // ===== Client: check if collecting already started =====
   useEffect(() => {
-    const nowMin = getCurrentMinute();
+    if (typeof window === "undefined") return;
 
-    const savedLastMin = Number(localStorage.getItem(STORAGE_LAST_COLLECTED_MIN));
-    const lastMin = isNaN(savedLastMin) ? nowMin : savedLastMin;
+    const saved = getFromLS(STORAGE_LAST_COLLECTED);
+    if (!saved) return;
+    setStarted(true);
 
-    const passedMinutes = Math.min(nowMin - lastMin, MAX_MINUTES);
-    const offlineCoins = Math.max(passedMinutes, 0) * ratePerMinute;
-
-    const savedPocket = Number(localStorage.getItem(STORAGE_POCKET)) || 0;
-    const newPocket = savedPocket + offlineCoins;
-
-    setPocket(newPocket);
-    localStorage.setItem(STORAGE_POCKET, String(newPocket));
-    localStorage.setItem(STORAGE_LAST_COLLECTED_MIN, String(nowMin));
-  }, [ratePerMinute]);
-
-  /* ===== Second sync (UI only) ===== */
-  useEffect(() => {
     const t = setInterval(() => {
-      setSecondsLeft(60 - getCurrentSecond());
+      setSecondsLeft(getSecondsLeft());
+      setPocket(calculateOfflineMinutes() * rpm);
     }, 1000);
 
     return () => clearInterval(t);
-  }, []);
+  }, [rpm]);
 
-  /* ===== Add coins every new minute ===== */
+  // ===== Seconds sync (UI only) =====
   useEffect(() => {
-    if (secondsLeft !== 60) return;
+    if (typeof window === "undefined") return;
+  }, [rpm]);
 
-    setPocket((p) => {
-      const next = p + ratePerMinute;
-      localStorage.setItem(STORAGE_POCKET, String(next));
-      localStorage.setItem(STORAGE_LAST_COLLECTED_MIN, String(getCurrentMinute()));
-      return next;
-    });
-  }, [secondsLeft, ratePerMinute]);
+  // ===== Start collecting =====
+  const handleStart = () => {
+    const now = new Date().toJSON();
+    setIntoLS(STORAGE_LAST_COLLECTED, now);
+    setStarted(true);
+    setPocket(0);
+  };
 
-  /* ===== Collect ===== */
+  // ===== Collect =====
   const handleCollect = () => {
-    const savedBalance = Number(localStorage.getItem(STORAGE_BALANCE)) || 0;
-    const newBalance = (savedBalance + pocket / 1000000).toFixed(2);
+    if (pocket === 0) return;
 
-    localStorage.setItem(STORAGE_BALANCE, newBalance);
-    localStorage.setItem(STORAGE_POCKET, "0");
-    localStorage.setItem(STORAGE_LAST_COLLECTED_MIN, String(getCurrentMinute()));
+    onCollect(pocket);
 
     setPocket(0);
+    setIntoLS(STORAGE_LAST_COLLECTED, new Date().toJSON());
   };
 
   return (
     <div className="m-auto my-2 flex max-w-sm flex-col items-center gap-2 text-xl">
-      <Pocket max={ratePerMinute * MAX_MINUTES} value={pocket} />
+      <Pocket value={pocket} max={rpm * MAX_MINUTES} />
 
-      {/* <Pocket max={ratePerMinute * MAX_MINUTES} value={9000000} /> */}
-      <Button label="Collect" onClick={handleCollect} disabled={pocket === 0} variant="golden" />
-      <ShiningEffect text={`${getDisplayValue(ratePerMinute)} in ${secondsLeft}s`} />
+      {!started ? (
+        <Button label="Start Collecting" onClick={handleStart} variant="golden" />
+      ) : (
+        <Button label="Collect" onClick={handleCollect} disabled={pocket === 0} variant="golden" />
+      )}
+
+      {started && (
+        <ShiningEffect
+          text={`${getDisplayValue(rpm)} in ${secondsLeft}s`}
+          className="from-blue-400 via-blue-500 to-blue-600"
+        />
+      )}
     </div>
   );
 };
 
+export default Collect;
+
+/* ===== Pocket bar ===== */
+
 interface PocketProps {
-  max: number;
   value: number;
+  max: number;
 }
 
-const Pocket = ({max, value}: PocketProps) => {
+const Pocket = ({value, max}: PocketProps) => {
   const isCritical = value >= max * 0.3;
-  const displayValue = getDisplayValue(value);
 
   return (
     <div className="flex w-full items-center gap-1 px-4">
@@ -110,22 +116,13 @@ const Pocket = ({max, value}: PocketProps) => {
               ? "from-red-500 via-red-600 to-red-700"
               : "from-yellow-500 via-yellow-300 to-yellow-200",
           )}
-          style={{width: `${(value * 100) / max}%`}}
-        ></div>
-        <div className="flex-1 transition-all"></div>
+          style={{width: `${Math.min(100, (value / max) * 100)}%`}}
+        />
         <ShiningEffect
-          text={`${displayValue}`}
+          text={getDisplayValue(value)}
           className="absolute flex size-full items-center justify-center text-3xl"
         />
       </div>
-      <div
-        className={cn(
-          "h-12 w-1.5 rounded-full shadow-[inset_0_0_2px_0]",
-          value >= max && "bg-red-700",
-        )}
-      ></div>
     </div>
   );
 };
-
-export default Collect;

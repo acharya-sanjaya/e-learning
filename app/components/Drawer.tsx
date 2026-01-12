@@ -18,7 +18,7 @@ const Drawer = ({open, onClose, children, width = "400px"}: DrawerProps) => {
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
         )}
         onClick={onClose}
-        onKeyDown={(e) => e.key === "Escape" && onClose()}
+        onKeyDown={(e) => (e.key === "Escape" || e.key === "Enter") && onClose()}
         role="button"
         tabIndex={0}
       ></div>

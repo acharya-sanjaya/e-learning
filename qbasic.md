@@ -1,7 +1,9 @@
 WHAT IS QBASIC?
+
 - Its is a programming language.
 
 Confused? No problem.
+
 - Programming language is just like the language we speak.
 
 For example:
@@ -28,18 +30,20 @@ And that's called SYNTAX.
 
 Programming is a way more easier than you think.
 
-----------------------------------
-CLS
-----------------------------------
-CLear Screen 
+---
+
+## CLS
+
+CLear Screen
 If you want your friend to rub the board in your class, what will you say?
 => "Hey friend, clear the board"
 But for computer, => you will just write CLS
 No matter where, but whenever you write CLS, the computer will clear the screen for you.
 
-----------------------------------
-PRINT STATEMENT
-----------------------------------
+---
+
+## PRINT STATEMENT
+
 Think PRINT as your PEN 🖊️
 
 What does a pen do?
@@ -55,6 +59,7 @@ Hello
 
 Ok now let's try to write a program.
 Your task is:
+
 1. First Clear the screen
 2. Tell computer to write your name
 
@@ -84,9 +89,10 @@ PRINT "Sanjaya Acharya"
 
 This is how you write a program.
 
-----------------------------------
-VARIABLES
-----------------------------------
+---
+
+## VARIABLES
+
 Think VARIABLE as a box 📦
 
 Why do we use boxes at home? => To store things!
@@ -131,10 +137,11 @@ rollNumber = 30
 
 Why is this better?
 Because the name of the variable is meaningful.
- 
-----------------------------------
-RULES FOR NAMING VARIABLES
-----------------------------------
+
+---
+
+## RULES FOR NAMING VARIABLES
+
 Can you give a random name to a variable?
 Yes!
 Instead of writing rupees = 10,
@@ -175,10 +182,10 @@ age 1 = 10 ❌
 age1 = 10 ✔️
 @$# = 40 ❌
 
+---
 
-----------------------------------
-NUMBERS AND STRINGS
-----------------------------------
+## NUMBERS AND STRINGS
+
 What is a number? => 1, 2, 10, 100, 90, 9999
 We all know what a number is.
 
@@ -189,7 +196,7 @@ ANYTHING THAT IS BETWEEN DOUBLE QUOTES IS A STRING.
 
 "123" => now tell me is it a number or string?
 => Of course its a string.
-Because ANYTHING, Literally ANYTHING can be a string when it is surrounded by "  "
+Because ANYTHING, Literally ANYTHING can be a string when it is surrounded by " "
 
 Now heres a MOST IMPORTANT thing:
 We are humans we can figure it out whether it is a number or string.
@@ -203,9 +210,9 @@ price$ = "50 rupees" ✔️
 name = "Ramesh" ❌
 name$ = "Ramesh" ✔️
 
-----------------------------------
-PRINTING VARIABLES
-----------------------------------
+---
+
+## PRINTING VARIABLES
 
 Example:
 x = 10

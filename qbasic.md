@@ -11,12 +11,8 @@
 .green {
     color: #22C55E;
 }
-.snippet {
-    background-color: black;
-    color: white;
-    border: 2px solid #9999;
-    padding: 10px;
-    margin: 10px 0;
+.center {
+    text-align: center;
 }
 </style>
 
@@ -391,12 +387,161 @@ You see?<br>
 "**x is** " is a normal message **(string)**.<br>
 So, its printed **as it is**<br>
 
-But, **x** is a variable. so, its **not** printed **as it is**.<br>
-Instead, the value of **x** (which is 10) is printed.
+But, **x** is a variable. so, it will be **replaced** by the **value of x**(which is 10).
 
 So,
 
 ```
-x is; x ❌
+x is x  ❌
 x is 10 ✔️
+```
+
+**Another example:**
+
+```basic
+LET name$ = "Sanjaya Acharya"
+PRINT "My name is "; name$
+```
+
+What is the Output?
+
+```
+My name is name
+```
+
+Haha, Just kidding!<br>
+The real Output is:
+
+```
+My name is Sanjaya Acharya
+```
+
+In the code,
+"**My name is**" is surrounded by double quotes.<br>
+So My name is printed **same to same**
+
+But,<br>
+**name$** is not surrounded by double quotes.<br>
+So, **name$** is **replaced** by **Sanjaya Acharya**.
+
+Therefore,
+
+```
+My name is name$          ❌
+My name is Sanjaya Acharya ✔️
+```
+
+<br><br>
+
+# Showing the multiplication table
+
+<div class="red bold center">
+<div>This is VERY VERY IMPORTANT</div>
+<div>So, note it down in your copy as well</div>
+</div>
+<br>
+
+The table must look like:<br>
+5 x 1 = 5<br>
+5 x 2 = 10<br>
+
+So, how to make it 🤔<br>
+Don't worry! I will show you.
+
+```basic
+LET num = 5
+PRINT num; " x 1 = "; num * 1
+```
+
+Here are three things in PRINT
+
+1. **num**<br>
+   Here is no double quotes<br>
+   So, it is a variable<br>
+
+   So, in screen,<br>
+   **num** is replaced by it's value **(which is 5)**<br>
+
+   So, the output is:
+
+   ```
+   5
+   ```
+
+2. "**x 1 =**"<br>
+   Here is double quotes<br>
+   So, it is a string<br>
+
+   So, in screen,<br>
+   The **x 1 =** is printed **same to same**<br>
+
+   Now, the output becomes:
+
+   ```
+   5 x 1 =
+   ```
+
+3. **num \* 1**<br>
+   Here is no double quotes<br>
+   So, it is a variable<br>
+
+   So, in screen,<br>
+   The **value** of **num \* 1** is printed<br>
+   But what is the value of **num \* 1**?<br>
+   It is **5** \* **1**<br>
+   Because **num** = **5**<br>
+
+   Now, the final output becomes:
+
+   ```
+   5 x 1 = 5
+   ```
+
+   Now it looks like the table, right?.<br>
+   Similarly, you can do the same for:
+   5 x 2 = 10<br>
+   5 x 3 = 15<br>
+   5 x 4 = 20<br>
+   5 x 5 = 25<br>
+   5 x 6 = 30<br>
+   5 x 7 = 35<br>
+   5 x 8 = 40<br>
+   5 x 9 = 45<br>
+   5 x 10 = 50<br>
+
+## TASK
+
+- Write a program to print the multiplication table of 7.
+
+```basic
+CLS
+
+LET n = 7
+PRINT n; " x 1 = "; n * 1
+PRINT n; " x 2 = "; n * 2
+PRINT n; " x 3 = "; n * 3
+PRINT n; " x 4 = "; n * 4
+PRINT n; " x 5 = "; n * 5
+PRINT n; " x 6 = "; n * 6
+PRINT n; " x 7 = "; n * 7
+PRINT n; " x 8 = "; n * 8
+PRINT n; " x 9 = "; n * 9
+PRINT n; " x 10 = "; n * 10
+
+END
+```
+
+Output:
+
+```
+7  x   1  =   7
+7  x   2  =  14
+7  x   3  =  21
+7  x   4  =  28
+7  x   5  =  35
+7  x   6  =  42
+7  x   7  =  49
+7  x   8  =  56
+7  x   9  =  63
+7  x  10  =  70
 ```

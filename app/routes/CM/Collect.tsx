@@ -34,6 +34,7 @@ const Collect = ({rpm, onCollect}: CollectProps) => {
   const [pocket, setPocket] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(60);
   const [started, setStarted] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   // ===== Client: check if collecting already started =====
   useEffect(() => {
@@ -46,6 +47,7 @@ const Collect = ({rpm, onCollect}: CollectProps) => {
     const t = setInterval(() => {
       setSecondsLeft(getSecondsLeft());
       setPocket(calculateOfflineMinutes() * rpm);
+      calculateOfflineMinutes() === MAX_MINUTES && setPaused(true);
     }, 1000);
 
     return () => clearInterval(t);
@@ -84,11 +86,15 @@ const Collect = ({rpm, onCollect}: CollectProps) => {
         <Button label="Collect" onClick={handleCollect} disabled={pocket === 0} variant="golden" />
       )}
 
-      {started && (
+      {started && !paused && (
         <ShiningEffect
           text={`${getDisplayValue(rpm)} in ${secondsLeft}s`}
           className="from-blue-400 via-blue-500 to-blue-600"
         />
+      )}
+
+      {paused && (
+        <ShiningEffect text="Mining is paused!" className="from-red-400 via-red-500 to-red-600" />
       )}
     </div>
   );

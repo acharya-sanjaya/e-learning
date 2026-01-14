@@ -81,8 +81,8 @@ Now, press **F5** and you will see:
 Hello
 ```
 
-**<span style="color:#EF4444">NOTE: </span>**
-**<span style="color: #3B82F6">F5</span>** means **<span style="color: #3B82F6">RUN</span>** the program.
+**<span style="color: red">NOTE: </span>**
+**<span style="color: lightblue">F5</span>** means **<span style="color: lightblue">RUN</span>** the program.
 
 ---
 

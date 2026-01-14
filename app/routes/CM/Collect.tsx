@@ -27,7 +27,7 @@ const calculateOfflineMinutes = () => {
 
   const offMins = timeDiff.day * 24 * 60 + timeDiff.hrs * 60 + timeDiff.min;
 
-  return offMins;
+  return Math.min(offMins, MAX_MINUTES);
 };
 
 const Collect = ({rpm, onCollect}: CollectProps) => {

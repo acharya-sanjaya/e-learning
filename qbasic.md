@@ -1,26 +1,9 @@
-<style>
-.bold {
-    font-weight: bold;
-}
-.blue {
-    color: #3B82F6;
-}
-.red {
-    color: #EF4444;
-}
-.green {
-    color: #22C55E;
-}
-.center {
-    text-align: center;
-}
-</style>
-
-## WHAT IS QBASIC?
+## What is QBASIC❓
 
 - Its is a programming language.
+- FullForm: Quick Beginner's All Purpose Symbolic Instruction Code
 
-Confused? No problem.
+Confused? No problem! We will learn step by step.
 
 - Programming language is just like the language we speak.
 
@@ -34,7 +17,7 @@ See? That's how easy it is?
 
 ---
 
-## Now let's think about Computers.
+## 💻 Now let's think about Computers.
 
 - You have computer in your desk and you want it to open a file.
 - What will you do?
@@ -98,8 +81,8 @@ Now, press **F5** and you will see:
 Hello
 ```
 
-<span class="bold red">NOTE: </span>
-<span class="bold blue">F5</span> means <span class="bold blue">RUN</span> the program.
+**<span style="color:#EF4444">NOTE: </span>**
+**<span style="color: #3B82F6">F5</span>** means **<span style="color: #3B82F6">RUN</span>** the program.
 
 ---
 
@@ -319,7 +302,7 @@ LET #$@$# = 40    ❌
   - Of course its a string.
   - Because ANYTHING, Literally ANYTHING can be a string when it is surrounded by **" "**
 
-## <div class="bold red">Now here is a most important thing</div>
+## <div style="color:#EF4444">Now here is a most important thing</div>
 
 We are humans<br>
 We can figure it out whether it is a number or string.<br>
@@ -435,7 +418,7 @@ My name is Sanjaya Acharya ✔️
 
 # Showing the multiplication table
 
-<div class="red bold center">
+<div style="color:#EF4444; text-align:center; font-weight:bold">
 <div>This is VERY VERY IMPORTANT</div>
 <div>So, note it down in your copy as well</div>
 </div>
